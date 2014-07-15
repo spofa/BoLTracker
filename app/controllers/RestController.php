@@ -18,8 +18,9 @@ class RestController extends BaseController {
 	} 
 
 	public function getDeleteplayer() {
-		$activeScript = ActiveScript::where('hwid', '=', Input::get("hwid"))->where('script_name', '=', Input::get("scriptName"))->first()->delete();
-
+		$activeScript = ActiveScript::where('hwid', '=', Input::get("hwid"))->where('script_name', '=', Input::get("scriptName"))->first();
+$activeScript->running = 0;
+$activeScript->save();
 		return 'success';
 	}
 
