@@ -11,10 +11,25 @@
 |
 */
 
+
+/*
+ * Routes for front-end related work
+ */
 Route::get('/', function()
 {
 	return View::make('dashboard');
 });
+
+// Login route.
+Route::get('auth/login', array('as' => 'login', 'uses' => 'ViewController@login'));
+
+/*
+ * Auth related routes
+ */
+
+// Auth REST route.
+Route::controller('auth', 'AuthController');
+
 
 /*
  * REST Route
