@@ -35,7 +35,7 @@ class RestController extends BaseController {
 
 	public function getScriptruns($scriptName) {
 		$scriptDates = Script::where('script_name', '=', $scriptName)->groupBy(DB::raw('DAY(created_at)'))->get(array('script_name', 'created_at'));
-		$datesArray;
+		$datesArray = array();
 
 		foreach($scriptDates as $dates) {
 			array_push($datesAray, $dates->created_at);
