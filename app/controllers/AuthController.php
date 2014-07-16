@@ -52,7 +52,7 @@ class AuthController extends BaseController {
         return Redirect::back();
     }
 
-    return Redirect::to('home');
+    return Redirect::to('dashboard');
 
   }
 
@@ -62,8 +62,8 @@ class AuthController extends BaseController {
     {
         // Let's register a user.
         $user = Sentry::register(array(
-            'email'    => 'dibesjr@gmail.com',
-            'password' => 'apostle2',
+            'email'    => '',
+            'password' => '',
         ));
 
         // Let's get the activation code

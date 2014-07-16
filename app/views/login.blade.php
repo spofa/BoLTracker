@@ -32,8 +32,8 @@
 		<link rel="stylesheet" type="text/css" media="screen" href="/css/demo.css">
 
 		<!-- FAVICONS -->
-		<link rel="shortcut icon" href="img/favicon/favicon.ico" type="image/x-icon">
-		<link rel="icon" href="img/favicon/favicon.ico" type="image/x-icon">
+		<link rel="shortcut icon" href="/img/favicon/favicon.ico" type="image/x-icon">
+		<link rel="icon" href="/img/favicon/favicon.ico" type="image/x-icon">
 
 		<!-- GOOGLE FONT -->
 		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
@@ -45,7 +45,7 @@
 			<!--<span id="logo"></span>-->
 
 			<div id="logo-group">
-				<span id="logo"> <img src="img/logo.png" alt="SmartAdmin"> </span>
+				<span id="logo"> <img src="/img/logo.png" alt="SmartAdmin"> </span>
 
 				<!-- END AJAX-DROPDOWN -->
 			</div>
@@ -55,9 +55,17 @@
 		</header>
 
 		<div id="main" role="main">
-
 			<!-- MAIN CONTENT -->
 			<div id="content" class="container">
+				@if (Session::has('error'))
+				<div class="alert alert-danger fade in">
+					<button class="close" data-dismiss="alert">
+						×
+					</button>
+					<i class="fa-fw fa fa-times"></i>
+					<strong>Error!</strong> {{{ Session::get('error') }}}
+				</div>
+				@endif
 
 				<div class="row">
 					<div class="col-xs-12 col-sm-12 col-md-7 col-lg-8 hidden-xs hidden-sm">
@@ -80,7 +88,7 @@
 					</div>
 					<div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
 						<div class="well no-padding">
-							<form action="auth/authenticate" id="login-form" class="smart-form client-form">
+							<form action="/auth/authenticate" method="post" id="login-form" class="smart-form client-form">
 								<header>
 									Sign In
 								</header>
@@ -128,7 +136,7 @@
 		<!--================================================== -->	
 
 		<!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
-		<script src="js/plugin/pace/pace.min.js"></script>
+		<script src="/js/plugin/pace/pace.min.js"></script>
 
 	    <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
 	    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
@@ -180,7 +188,7 @@
 		<![endif]-->
 
 		<!-- MAIN APP JS FILE -->
-		<script src="js/app.js"></script>
+		<script src="/js/app.js"></script>
 
 		<script type="text/javascript">
 			runAllForms();

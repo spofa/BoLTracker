@@ -4,11 +4,19 @@ class ViewController extends BaseController {
 	protected $layout = 'layouts.master';
 
 	public function dashboard() {
-		$layout->content = View::make('dashboard');
+		if (Sentry::check()) {
+			$this->layout->content = View::make('dashboard');
+		} else {
+			return Redirect::to('auth/login');
+		}
 	}
 
 	public function login() {
-		return View::make('login');
+		if (Sentry::check()) {
+			return Redirect::to('dashboard');
+		} else {
+			return View::make('login');
+		}
 	}
 
 }

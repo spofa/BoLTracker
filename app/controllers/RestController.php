@@ -33,6 +33,12 @@ class RestController extends BaseController {
 		return 'success';
 	}
 
+	public function getScriptruns($scriptName) {
+		$scriptRuns = Script::where('script_name', '=', $scriptName)->get();
+		return $scriptRuns;
+
+	}
+
 }
 
 ?>

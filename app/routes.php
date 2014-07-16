@@ -17,11 +17,13 @@
  */
 Route::get('/', function()
 {
-	return View::make('dashboard');
+	return Redirect::to('dashboard');
 });
 
 // Login route.
 Route::get('auth/login', array('as' => 'login', 'uses' => 'ViewController@login'));
+// Dashboard route.
+Route::get('dashboard', array('as' => 'dashboard', 'uses' => 'ViewController@dashboard'));
 
 /*
  * Auth related routes
