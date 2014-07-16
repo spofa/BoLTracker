@@ -35,11 +35,24 @@ class RestController extends BaseController {
 
 	public function getScriptruns($scriptName) {
 		$scriptDates = Script::where('script_name', '=', $scriptName)->groupBy(DB::raw('DAY(created_at)'))->get(array('script_name', 'created_at'));
+		$scripts = Script::where('script_name', '=', $scriptName)->get(array('script_name', 'created_at'));
 		$datesArray = array();
 
 		foreach($scriptDates as $dates) {
-			array_push($datesArray, date('Y-m-d', strtotime($dates->created_at)));
+			array_push($datesArray, date('Y-m-d', array(strtotime($dates->created_at)));
 		}
+		/*
+		foreach ($scripts as $script) {
+			
+			$tempDate = date('Y-m-d', strtotime($script->created_at));
+
+			for ($i = 0; $i < count($datesArray); $i++) { 
+				if ($tempDate == $datesArray[$i]) {
+					$datesArray[$i] 
+				}
+			}
+		} 
+		*/
 
 		return $datesArray;
 
