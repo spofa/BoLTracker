@@ -38,7 +38,7 @@ class RestController extends BaseController {
 		$datesArray = array();
 
 		foreach($scriptDates as $dates) {
-			array_push($datesAray, $dates->created_at);
+			array_push($datesArray, $dates->created_at);
 		}
 
 		return $datesArray;
