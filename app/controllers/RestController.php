@@ -13,11 +13,13 @@ class RestController extends BaseController {
 		}
 
 		$script = new Script();
+		$script->owner_id = Input::get('id');
 		$script->hwid = Input::get("hwid");
 		$script->script_name = Input::get("scriptName");
 		$script->save();
 
 		$activeScript = new ActiveScript();
+		$activeScript->owner_id = Input::get('id');
 		$activeScript->hwid = Input::get("hwid");
 		$activeScript->script_name = Input::get("scriptName");
 		$activeScript->running = 1;
@@ -39,20 +41,19 @@ class RestController extends BaseController {
 		$datesArray = array();
 
 		foreach($scriptDates as $dates) {
-			array_push($datesArray, date('Y-m-d', array(strtotime($dates->created_at))));
+			array_push($datesArray, array(date('Y-m-d', strtotime($dates->created_at)), 0));
 		}
-		/*
+		
 		foreach ($scripts as $script) {
 			
 			$tempDate = date('Y-m-d', strtotime($script->created_at));
 
 			for ($i = 0; $i < count($datesArray); $i++) { 
-				if ($tempDate == $datesArray[$i]) {
-					$datesArray[$i] 
+				if ($tempDate == $datesArray[$i][0]) {
+					$datesArray[$i][1]++;  
 				}
 			}
-		} 
-		*/
+		}
 
 		return $datesArray;
 
