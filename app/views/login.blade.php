@@ -45,7 +45,7 @@
 			<!--<span id="logo"></span>-->
 
 			<div id="logo-group">
-				<span id="logo"> <img src="/img/logo.png" alt="SmartAdmin"> </span>
+				<span id="logo"> <h1 style="margin:0;font-weight:bold">BoLTracker</h1> </span>
 
 				<!-- END AJAX-DROPDOWN -->
 			</div>
@@ -72,13 +72,13 @@
 
 						<div class="row">
 							<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-								<h5 class="about-heading">About SmartAdmin - Are you up to date?</h5>
+								<h5 class="about-heading">About BoLTracker</h5>
 								<p>
 									Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa.
 								</p>
 							</div>
 							<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-								<h5 class="about-heading">Not just your average template!</h5>
+								<h5 class="about-heading">Up to date and damn good looking stats!</h5>
 								<p>
 									Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi voluptatem accusantium!
 								</p>

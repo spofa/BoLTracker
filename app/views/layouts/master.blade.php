@@ -94,10 +94,10 @@
 						<i class="fa fa-angle-down"></i>
 					</a> 
 					<ul class="dropdown-menu">
-			            <li><a href="#">Action</a></li>
-			            <li><a href="#">Another action</a></li>
+			            <li><a href="#">Add a script</a></li>
+			            <li><a href="#">Edit a script</a></li>
 			            <li class="divider"></li>
-			            <li><a href="#">Separated link</a></li>
+			            <li><a href="#">Edit User</a></li>
 			        </ul>
 					
 				</div>
