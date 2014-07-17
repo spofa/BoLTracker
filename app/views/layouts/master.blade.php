@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">-->
 
-		<title> SmartAdmin </title>
+		<title> BoL Tracker </title>
 		<meta name="description" content="">
 		<meta name="author" content="">
 
@@ -157,17 +157,23 @@
 
 			<!-- User info -->
 			<div class="login-info">
-				<span> <!-- User image size is adjusted inside CSS, it should stay as it --> 
+				<div class="dropdown" style="margin-left:10px;"> <!-- User image size is adjusted inside CSS, it should stay as it --> 
 					
-					<a href="javascript:void(0);" id="show-shortcut">
+					<a href="#" class="username-toggle" data-toggle="dropdown" id="show-shortcut">
 						<img src="img/avatars/sunny.png" alt="me" class="online" /> 
 						<span>
 							john.doe 
 						</span>
 						<i class="fa fa-angle-down"></i>
 					</a> 
+					<ul class="dropdown-menu">
+			            <li><a href="#">Action</a></li>
+			            <li><a href="#">Another action</a></li>
+			            <li class="divider"></li>
+			            <li><a href="#">Separated link</a></li>
+			        </ul>
 					
-				</span>
+				</div>
 			</div>
 			<!-- end user info -->
 
@@ -321,6 +327,8 @@
 
 				// DO NOT REMOVE : GLOBAL FUNCTIONS!
 				pageSetUp();
+
+				$(".username-toggle").dropdown();
 
 				/*
 				 * PAGE RELATED SCRIPTS
