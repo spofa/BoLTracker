@@ -62,8 +62,8 @@ class AuthController extends BaseController {
     {
         // Let's register a user.
         $user = Sentry::register(array(
-            'email'    => 'bilbao@gmx.ru',
-            'password' => 'randompw',
+            'email'    => '',
+            'password' => '',
         ));
 
         // Let's get the activation code
@@ -87,6 +87,7 @@ class AuthController extends BaseController {
 
   public function getLogout() {
     Sentry::logout();
+    return Redirect::to('/');
   }
 
 }

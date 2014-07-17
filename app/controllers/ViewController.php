@@ -17,9 +17,9 @@ class ViewController extends BaseController {
 				"scripts" => $scripts,
 				"startDate" => $startDate,
 				"endDate" => $endDate
- 				));
+			));
 		} else {
-			return Redirect::to('auth/login');
+			return Redirect::to('/auth/login');
 		}
 	}
 
@@ -28,6 +28,19 @@ class ViewController extends BaseController {
 			return Redirect::to('dashboard');
 		} else {
 			return View::make('login');
+		}
+	}
+
+	public function script($scriptName) {
+		if (Sentry::check()) {
+			$scripts = UserScript::where('owner_id', '=', Sentry::getUser()->id)->get();
+
+			// Make sure to send along to script names for the menu!
+			$this->layout->with('scripts', $scripts);
+			$this->layout->content = "Test";
+			return $this->layout;
+		} else {
+			return Redirect::to('/auth/login');
 		}
 	}
 

@@ -17,12 +17,12 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 		<!-- Basic Styles -->
-		<link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" media="screen" href="css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" media="screen" href="/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" media="screen" href="/css/font-awesome.min.css">
 
 		<!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
-		<link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-production.css">
-		<link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-skins.css">
+		<link rel="stylesheet" type="text/css" media="screen" href="/css/smartadmin-production.css">
+		<link rel="stylesheet" type="text/css" media="screen" href="/css/smartadmin-skins.css">
 
 		<!-- SmartAdmin RTL Support is under construction
 		<link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-rtl.css"> -->
@@ -32,11 +32,11 @@
 		<link rel="stylesheet" type="text/css" media="screen" href="css/your_style.css"> -->
 
 		<!-- Demo purpose only: goes with demo.js, you can delete this css when designing your own WebApp -->
-		<link rel="stylesheet" type="text/css" media="screen" href="css/demo.css">
+		<link rel="stylesheet" type="text/css" media="screen" href="/css/demo.css">
 
 		<!-- FAVICONS -->
-		<link rel="shortcut icon" href="img/favicon/favicon.ico" type="image/x-icon">
-		<link rel="icon" href="img/favicon/favicon.ico" type="image/x-icon">
+		<link rel="shortcut icon" href="/img/favicon/favicon.ico" type="image/x-icon">
+		<link rel="icon" href="/img/favicon/favicon.ico" type="image/x-icon">
 
 		<!-- GOOGLE FONT -->
 		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
@@ -67,7 +67,7 @@
 
 				<!-- logout button -->
 				<div id="logout" class="btn-header transparent pull-right">
-					<span> <a href="login.html" title="Sign Out"><i class="fa fa-sign-out"></i></a> </span>
+					<span> <a href="/auth/logout" title="Sign Out"><i class="fa fa-sign-out"></i></a> </span>
 				</div>
 				<!-- end logout button -->
 
@@ -87,7 +87,7 @@
 				<div class="dropdown" style="margin-left:10px;"> <!-- User image size is adjusted inside CSS, it should stay as it --> 
 					
 					<a href="#" class="username-toggle" data-toggle="dropdown" id="show-shortcut">
-						<img src="img/avatars/sunny.png" alt="me" class="online" /> 
+						<img src="/img/avatars/sunny.png" alt="me" class="online" /> 
 						<span>
 							{{{ explode("@", Sentry::getUser()->email)[0] }}} 
 						</span>
@@ -118,14 +118,14 @@
 
 				<ul>
 					<li class="active">
-						<a href="index.html" title="Dashboard"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">Dashboard</span></a>
+						<a href="/" title="Dashboard"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">Dashboard</span></a>
 					</li>
 					<li>
 						<a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">Scripts</span></a>
 						<ul>
 							@foreach($scripts as $script)
 							<li>
-								<a href="script/{{{ $script->script_name }}}">{{{ $script->script_name }}}</a>
+								<a href="/script/{{{ $script->script_name }}}">{{{ $script->script_name }}}</a>
 							</li>
 
 							@endforeach
@@ -159,58 +159,58 @@
 		<!--================================================== -->
 
 		<!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
-		<script data-pace-options='{ "restartOnRequestAfter": true }' src="js/plugin/pace/pace.min.js"></script>
+		<script data-pace-options='{ "restartOnRequestAfter": true }' src="/js/plugin/pace/pace.min.js"></script>
 
 		<!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
 		<script>
 			if (!window.jQuery) {
-				document.write('<script src="js/libs/jquery-2.0.2.min.js"><\/script>');
+				document.write('<script src="/js/libs/jquery-2.0.2.min.js"><\/script>');
 			}
 		</script>
 
 		<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 		<script>
 			if (!window.jQuery.ui) {
-				document.write('<script src="js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+				document.write('<script src="/js/libs/jquery-ui-1.10.3.min.js"><\/script>');
 			}
 		</script>
 
 		<!-- JS TOUCH : include this plugin for mobile drag / drop touch events
-		<script src="js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> -->
+		<script src="/js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> -->
 
 		<!-- BOOTSTRAP JS -->
-		<script src="js/bootstrap/bootstrap.min.js"></script>
+		<script src="/js/bootstrap/bootstrap.min.js"></script>
 
 		<!-- CUSTOM NOTIFICATION -->
-		<script src="js/notification/SmartNotification.min.js"></script>
+		<script src="/js/notification/SmartNotification.min.js"></script>
 
 		<!-- JARVIS WIDGETS -->
-		<script src="js/smartwidgets/jarvis.widget.min.js"></script>
+		<script src="/js/smartwidgets/jarvis.widget.min.js"></script>
 
 		<!-- EASY PIE CHARTS -->
-		<script src="js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
+		<script src="/js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
 
 		<!-- SPARKLINES -->
-		<script src="js/plugin/sparkline/jquery.sparkline.min.js"></script>
+		<script src="/js/plugin/sparkline/jquery.sparkline.min.js"></script>
 
 		<!-- JQUERY VALIDATE -->
-		<script src="js/plugin/jquery-validate/jquery.validate.min.js"></script>
+		<script src="/js/plugin/jquery-validate/jquery.validate.min.js"></script>
 
 		<!-- JQUERY MASKED INPUT -->
-		<script src="js/plugin/masked-input/jquery.maskedinput.min.js"></script>
+		<script src="/js/plugin/masked-input/jquery.maskedinput.min.js"></script>
 
 		<!-- JQUERY SELECT2 INPUT -->
-		<script src="js/plugin/select2/select2.min.js"></script>
+		<script src="/js/plugin/select2/select2.min.js"></script>
 
 		<!-- JQUERY UI + Bootstrap Slider -->
-		<script src="js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>
+		<script src="/js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>
 
 		<!-- browser msie issue fix -->
-		<script src="js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
+		<script src="/js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
 
 		<!-- FastClick: For mobile devices -->
-		<script src="js/plugin/fastclick/fastclick.js"></script>
+		<script src="/js/plugin/fastclick/fastclick.js"></script>
 
 		<!--[if IE 7]>
 
@@ -219,25 +219,20 @@
 		<![endif]-->
 
 		<!-- MAIN APP JS FILE -->
-		<script src="js/app.js"></script>
+		<script src="/js/app.js"></script>
 		
 		<!-- PAGE RELATED PLUGIN(S) -->
 		
-		<!-- Flot Chart Plugin: Flot Engine, Flot Resizer, Flot Tooltip -->
-		<script src="js/plugin/flot/jquery.flot.cust.js"></script>
-		<script src="js/plugin/flot/jquery.flot.resize.js"></script>
-		<script src="js/plugin/flot/jquery.flot.tooltip.js"></script>
-		
 		<!-- Vector Maps Plugin: Vectormap engine, Vectormap language -->
-		<script src="js/plugin/vectormap/jquery-jvectormap-1.2.2.min.js"></script>
-		<script src="js/plugin/vectormap/jquery-jvectormap-world-mill-en.js"></script>
+		<script src="/js/plugin/vectormap/jquery-jvectormap-1.2.2.min.js"></script>
+		<script src="/js/plugin/vectormap/jquery-jvectormap-world-mill-en.js"></script>
 		
 		<!-- Full Calendar -->
-		<script src="js/plugin/fullcalendar/jquery.fullcalendar.min.js"></script>
+		<script src="/js/plugin/fullcalendar/jquery.fullcalendar.min.js"></script>
 
 		<!-- Morris Chart Dependencies -->
-		<script src="js/plugin/morris/raphael.2.1.0.min.js"></script>
-		<script src="js/plugin/morris/morris.min.js"></script>
+		<script src="/js/plugin/morris/raphael.2.1.0.min.js"></script>
+		<script src="/js/plugin/morris/morris.min.js"></script>
 
 		 @yield('customJS')
 
@@ -378,20 +373,6 @@
 					}
 				};
 
-				var plot = $.plot($("#updating-chart"), [getRandomData()], options);
-
-				/* live switch */
-				$('input[type="checkbox"]#start_interval').click(function() {
-					if ($(this).prop('checked')) {
-						$on = true;
-						updateInterval = 1500;
-						update();
-					} else {
-						clearInterval(updateInterval);
-						$on = false;
-					}
-				});
-
 				function update() {
 					if ($on == true) {
 						plot.setData([getRandomData()]);
@@ -409,67 +390,6 @@
 				/*end updating chart*/
 
 				/* TAB 2: Social Network  */
-
-				$(function() {
-					// jQuery Flot Chart
-					var twitter = [[1, 27], [2, 34], [3, 51], [4, 48], [5, 55], [6, 65], [7, 61], [8, 70], [9, 65], [10, 75], [11, 57], [12, 59], [13, 62]], facebook = [[1, 25], [2, 31], [3, 45], [4, 37], [5, 38], [6, 40], [7, 47], [8, 55], [9, 43], [10, 50], [11, 47], [12, 39], [13, 47]], data = [{
-						label : "Twitter",
-						data : twitter,
-						lines : {
-							show : true,
-							lineWidth : 1,
-							fill : true,
-							fillColor : {
-								colors : [{
-									opacity : 0.1
-								}, {
-									opacity : 0.13
-								}]
-							}
-						},
-						points : {
-							show : true
-						}
-					}, {
-						label : "Facebook",
-						data : facebook,
-						lines : {
-							show : true,
-							lineWidth : 1,
-							fill : true,
-							fillColor : {
-								colors : [{
-									opacity : 0.1
-								}, {
-									opacity : 0.13
-								}]
-							}
-						},
-						points : {
-							show : true
-						}
-					}];
-
-					var options = {
-						grid : {
-							hoverable : true
-						},
-						colors : ["#568A89", "#3276B1"],
-						tooltip : true,
-						tooltipOpts : {
-							//content : "Value <b>$x</b> Value <span>$y</span>",
-							defaultTheme : false
-						},
-						xaxis : {
-							ticks : [[1, "JAN"], [2, "FEB"], [3, "MAR"], [4, "APR"], [5, "MAY"], [6, "JUN"], [7, "JUL"], [8, "AUG"], [9, "SEP"], [10, "OCT"], [11, "NOV"], [12, "DEC"], [13, "JAN+1"]]
-						},
-						yaxes : {
-
-						}
-					};
-
-					var plot3 = $.plot($("#statsChart"), data, options);
-				});
 
 				// END TAB 2
 
@@ -781,18 +701,6 @@
 					});
 
 				}
-
-				// on dom ready
-				listFilter($.chat_users);
-
-				// open chat list
-				$.chat_list_btn.click(function() {
-					$(this).parent('#chat-container').toggleClass('open');
-				})
-
-				$.chat_body.animate({
-					scrollTop : $.chat_body[0].scrollHeight
-				}, 500);
 
 			});
 
