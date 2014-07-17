@@ -77,10 +77,11 @@ $(document).ready(function() {
 		jqxhr.complete(function() {
 			if ($('#{{ $script->script_name }}').length) {
 				var week_data = jqxhr;
+				console.log(jqxhr);
 				var {{ $script->script_name }} = Morris.Line({
 					element : '{{$script->script_name}}',
 					data : week_data,
-					xkey : 'period',
+					xkey : "period",
 					ykeys : ['{{ $script->script_name }}'],
 					labels : ['{{ $script->script_name }}'],
 					events : ['{{ $startDate }}', '{{ $endDate }}']

@@ -7,6 +7,10 @@ class Script extends Eloquent {
 	 * @var string
 	 */
 	protected $table = 'scripts';
+
+	public function getDatesAttribute($value) {
+    	$this->attributes['created_at'] = Carbon::createFromFormat('m/d/Y', $value);
+   	}
 }
 
 ?>
