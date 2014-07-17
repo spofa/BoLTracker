@@ -70,14 +70,9 @@ $(document).ready(function() {
 
 	@foreach($scripts as $script)
 
-		var jqxhr = $.getJSON("rest/scriptruns/{{ $script->script_name }}", function() {
-			//{{ $script->script_name }}.setData('[{"period":"2014-07-15","VeloxMorgana":1},{"period":"2014-07-16","VeloxMorgana":47}]');
-		});
-
-		jqxhr.complete(function() {
+		$.getJSON("rest/scriptruns/{{ $script->script_name }}", function(data) {
 			if ($('#{{ $script->script_name }}').length) {
-				var week_data = jqxhr;
-				console.log(jqxhr);
+				var week_data = data;
 				var {{ $script->script_name }} = Morris.Line({
 					element : '{{$script->script_name}}',
 					data : week_data,
