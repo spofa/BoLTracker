@@ -36,27 +36,94 @@ class RestController extends BaseController {
 	}
 
 	public function getScriptruns($scriptName) {
-		$scriptDates = Script::where('script_name', '=', $scriptName)->groupBy(DB::raw('DAY(created_at)'))->get(array('script_name', 'created_at'));
-		$scripts = Script::where('script_name', '=', $scriptName)->get(array('script_name', 'created_at'));
-		$datesArray = array();
 
-		foreach($scriptDates as $dates) {
-			array_push($datesArray, array(date('Y-m-d', strtotime($dates->created_at)), 0));
-		}
-		
-		foreach ($scripts as $script) {
+		if ($scriptName == "all") {
+			$scriptNames = Script::groupBy('script_name')->groupBy(DB::raw('DAY(created_at)'))->get(array('script_name', 'created_at'));
+			$scripts = Script::get(array('script_name', 'created_at'));
+			$datesArray = array();
+			$finalArray = array();
+
+			foreach($scriptNames as $scriptName) {
+				array_push($datesArray, array(
+					'period' => date('Y-m-d', strtotime($scriptName->created_at)),
+					$scriptName->script_name => 0
+				));
+			}
+
+			foreach ($scripts as $script) {
+				
+
+				$tempDate = date('Y-m-d', strtotime($script->created_at));
+
+				for ($i = 0; $i < count($datesArray); $i++) { 
+					$scriptName = (string)$script->script_name;
+
+					if ($tempDate == $datesArray[$i]['period'] && array_key_exists($scriptName, $datesArray[$i])) {
+						$datesArray[$i][$scriptName]++;  
+					}
+				}
+			}
+			// $datesArray is the first mentioned array of values.
+			// finalArray is an empty array that I want to push the final values into.
+			for ($i = 0; $i < count($datesArray) - 1; $i++) { 
+
+				for ($j = $i; $j < count($datesArray); $j++) { 
+
+					$key1 = array_keys($datesArray[$i]);
+					$key2 = array_keys($datesArray[$j]);
+					// First check to see if they have the same date, if they don't then no merging!
+					if ($datesArray[$i]['period'] == $datesArray[$j]['period']) {
+						if ($j == $i) {
+							array_push($finalArray, array(
+								'period' => $datesArray[$i]['period'],
+								$key1[1] => $datesArray[$i][$key1[1]]
+							));
+						} else {
+							if ($key1[1] == $key2[1]) {
+								array_push($finalArray, array(
+									'period' => $datesArray[$i]['period'], 
+									$key1[1] => $datesArray[$i][$key1[1]] + $datesArray[$j][$key2[1]]
+								));
+							} else {
+								array_push($finalArray, array(
+									'period' => $datesArray[$i]['period'],
+									$key1[1] => $datesArray[$i][$key1[1]],
+									$key2[1] => $datesArray[$j][$key2[1]]	
+								));
+							}
+						}
+					}
+
+				}
+			}
+
+			return $finalArray;
+
+		} else {
+			$scriptDates = Script::where('script_name', '=', $scriptName)->groupBy(DB::raw('DAY(created_at)'))->get(array('script_name', 'created_at'));
+			$scripts = Script::where('script_name', '=', $scriptName)->get(array('script_name', 'created_at'));
+			$datesArray = array();
+
+			foreach($scriptDates as $dates) {
+				array_push($datesArray, array(
+						'period' => date('Y-m-d', strtotime($dates->created_at)),
+						$dates->script_name => 0
+					));
+			}
 			
-			$tempDate = date('Y-m-d', strtotime($script->created_at));
+			foreach ($scripts as $script) {
+				
+				$tempDate = date('Y-m-d', strtotime($script->created_at));
 
-			for ($i = 0; $i < count($datesArray); $i++) { 
-				if ($tempDate == $datesArray[$i][0]) {
-					$datesArray[$i][1]++;  
+				for ($i = 0; $i < count($datesArray); $i++) { 
+					if ($tempDate == $datesArray[$i]['period']) {
+						$datesArray[$i][$script->script_name]++;  
+					}
 				}
 			}
 		}
 
 		return $datesArray;
-
 	}
 
 }

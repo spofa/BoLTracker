@@ -305,7 +305,18 @@
 		<!-- Full Calendar -->
 		<script src="js/plugin/fullcalendar/jquery.fullcalendar.min.js"></script>
 
+		<!-- Morris Chart Dependencies -->
+		<script src="js/plugin/morris/raphael.2.1.0.min.js"></script>
+		<script src="js/plugin/morris/morris.min.js"></script>
+
+
+		/*
+	 	 * Custom JS from page.
+		 */
+		 @yield('customJS')
+
 		<script>
+
 			$(document).ready(function() {
 
 				// DO NOT REMOVE : GLOBAL FUNCTIONS!

@@ -7,11 +7,12 @@
 <!-- row -->
 <div class="row">
 
+	@foreach($scripts as $script)
 	<!-- NEW WIDGET START -->
 	<article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
 		<!-- Widget ID (each widget will need unique ID)-->
-		<div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+		<div class="jarviswidget" id="wid-id-7" data-widget-editbutton="false">
 			<!-- widget options:
 			usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
 
@@ -27,7 +28,7 @@
 			-->
 			<header>
 				<span class="widget-icon"> <i class="fa fa-bar-chart-o"></i> </span>
-				<h2>Script Runs Overview</h2>
+				<h2>Time Graph</h2>
 
 			</header>
 
@@ -37,14 +38,14 @@
 				<!-- widget edit box -->
 				<div class="jarviswidget-editbox">
 					<!-- This area used as dropdown edit box -->
-					<input type="text">
+
 				</div>
 				<!-- end widget edit box -->
 
 				<!-- widget content -->
 				<div class="widget-body no-padding">
 
-					<div id="sales-graph" class="chart no-padding"></div>
+					<div id="{{ $script->script_name }}" class="chart no-padding"></div>
 
 				</div>
 				<!-- end widget content -->
@@ -54,12 +55,41 @@
 
 		</div>
 		<!-- end widget -->
-
 	</article>
-	<!-- WIDGET END -->
-
+	@endforeach
 </div>
 
 <!-- end row -->
+
+@stop
+
+@section('customJS')
+
+<script>
+$(document).ready(function() {
+
+	@foreach($scripts as $script)
+
+		var jqxhr = $.getJSON("rest/scriptruns/{{ $script->script_name }}", function() {
+			//{{ $script->script_name }}.setData('[{"period":"2014-07-15","VeloxMorgana":1},{"period":"2014-07-16","VeloxMorgana":47}]');
+		});
+
+		jqxhr.complete(function() {
+			if ($('#{{ $script->script_name }}').length) {
+				var week_data = jqxhr;
+				var {{ $script->script_name }} = Morris.Line({
+					element : '{{$script->script_name}}',
+					data : week_data,
+					xkey : 'period',
+					ykeys : ['{{ $script->script_name }}'],
+					labels : ['{{ $script->script_name }}'],
+					events : ['{{ $startDate }}', '{{ $endDate }}']
+				});
+			}
+		});
+
+	@endforeach
+});
+</script>
 
 @stop
