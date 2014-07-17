@@ -87,7 +87,7 @@ $(document).ready(function() {
 				  		{{$script->script_name}}.setData(data);
 				  	});
 				}
-				setInterval(update, 1000);
+				setInterval(update, 10000);
 			}
 		});
 
