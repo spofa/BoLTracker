@@ -81,6 +81,13 @@ $(document).ready(function() {
 					labels : ['{{ $script->script_name }}'],
 					events : ['{{ $startDate }}', '{{ $endDate }}']
 				});
+
+				function update() {
+					$.getJSON("rest/scriptruns/{{ $script->script_name }}", function(data) {
+				  		{{$script->script_name}}.setData(data);
+				  	});
+				}
+				setInterval(update, 1000);
 			}
 		});
 
