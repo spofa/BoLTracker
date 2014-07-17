@@ -239,10 +239,6 @@
 		<script src="js/plugin/morris/raphael.2.1.0.min.js"></script>
 		<script src="js/plugin/morris/morris.min.js"></script>
 
-
-		/*
-	 	 * Custom JS from page.
-		 */
 		 @yield('customJS')
 
 		<script>
