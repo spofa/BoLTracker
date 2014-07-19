@@ -197,13 +197,14 @@ $(document).ready(function() {
 
 		function update() {
 			$.getJSON("/rest/uniqueusers/{{ $scriptName }}", function(data) {
-		  		.prop('number', $('.{{ $scriptName }}-unique-users').html())
-			  	.animateNumber(
-			    {
-			      number: data
-			    },
-			    2000
-			  );
+		  		$('.{{ $scriptName }}-unique-users')
+				  .prop('number', $('.{{ $scriptName }}-unique-users').html())
+				  .animateNumber(
+				    {
+				      number: data
+				    },
+				    2000
+				  );
 		  	});
 		}
 		setInterval(update, 10000);
