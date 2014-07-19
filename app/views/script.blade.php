@@ -10,7 +10,7 @@
 	<!-- NEW WIDGET START -->
 	<article class="col-xs-12">
 		<!-- Widget ID (each widget will need unique ID)-->
-		<div class="jarviswidget" id="wid-id-7" data-widget-editbutton="false" data-widget-custombutton="true">
+		<div class="jarviswidget" id="wid-id-7" data-widget-editbutton="false" data-widget-custombutton="true" data-widget-sortable="false">
 			<!-- widget options:
 			usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
 			data-widget-colorbutton="false"
@@ -52,7 +52,7 @@
 	<!-- NEW WIDGET START -->
 	<article class="col-sm-4">
 <!-- Widget ID (each widget will need unique ID)-->
-		<div class="jarviswidget" id="wid-id-7" data-widget-editbutton="false" data-widget-custombutton="true">
+		<div class="jarviswidget" id="wid-id-7" data-widget-editbutton="false" data-widget-custombutton="true" data-widget-sortable="false">
 			<!-- widget options:
 			usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
 			data-widget-colorbutton="false"
@@ -85,7 +85,7 @@
 		</div>
 		<!-- end widget -->
 		<!-- Widget ID (each widget will need unique ID)-->
-		<div class="jarviswidget" id="wid-id-7" data-widget-editbutton="false" data-widget-custombutton="true">
+		<div class="jarviswidget" id="wid-id-7" data-widget-editbutton="false" data-widget-custombutton="true" data-widget-sortable="false">
 			<!-- widget options:
 			usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
 			data-widget-colorbutton="false"
@@ -122,7 +122,7 @@
 
 	<article class="col-sm-8">
 		<!-- Widget ID (each widget will need unique ID)-->
-		<div class="jarviswidget" id="wid-id-7" data-widget-editbutton="false" data-widget-custombutton="true">
+		<div class="jarviswidget" id="wid-id-7" data-widget-editbutton="false" data-widget-custombutton="true" data-widget-sortable="false">
 			<!-- widget options:
 			usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
 			data-widget-colorbutton="false"
