@@ -100,8 +100,8 @@ class RestController extends BaseController {
 			return $finalArray;
 
 		} else {
-			$scriptDates = Script::where('script_name', '=', $scriptName)->groupBy(DB::raw('DAY(created_at)'))->get(array('script_name', 'created_at'));
-			$scripts = Script::where('script_name', '=', $scriptName)->get(array('script_name', 'created_at'));
+			$scriptDates = Script::where('script_name', '=', $scriptName)->where("owner_id", "=", Sentry::getUser()->id)->groupBy(DB::raw('DAY(created_at)'))->get(array('script_name', 'created_at'));
+			$scripts = Script::where('script_name', '=', $scriptName)->where("owner_id", "=", Sentry::getUser()->id)->get(array('script_name', 'created_at'));
 			$datesArray = array();
 
 			foreach($scriptDates as $dates) {
@@ -124,6 +124,12 @@ class RestController extends BaseController {
 		}
 
 		return $datesArray;
+	}
+
+	public function getUniqueusers($scriptName) {
+		$uniqueUsers = Script::where("script_name", '=', $scriptName)->where("owner_id", "=", Sentry::getUser()->id)->groupBy("hwid")->get();
+
+		return count($uniqueUsers);
 	}
 
 }

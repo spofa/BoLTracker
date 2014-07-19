@@ -212,6 +212,8 @@
 		<!-- FastClick: For mobile devices -->
 		<script src="/js/plugin/fastclick/fastclick.js"></script>
 
+		<script src="/js/jquery.animateNumber.min.js"></script>
+
 		<!--[if IE 7]>
 
 		<h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>

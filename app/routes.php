@@ -25,7 +25,7 @@ Route::get('auth/login', array('as' => 'login', 'uses' => 'ViewController@login'
 // Dashboard route.
 Route::get('dashboard', array('as' => 'dashboard', 'uses' => 'ViewController@dashboard'));
 // Script view route.
-Route::get('script/{scriptName}', 'ViewController@script');
+Route::get('script/{scriptName}', array('as' => 'script', 'uses' => 'ViewController@script'));
 
 /*
  * Auth related routes

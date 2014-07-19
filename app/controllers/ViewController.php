@@ -12,7 +12,7 @@ class ViewController extends BaseController {
 			$startDate = date('Y-m-d', strtotime("-7 day"));
 
 			// Make sure to send along to script names for the menu!
-			$this->layout->with('scripts', $scripts);
+
 			$this->layout->content = View::make('dashboard')->with(array(
 				"scripts" => $scripts,
 				"startDate" => $startDate,
@@ -33,13 +33,10 @@ class ViewController extends BaseController {
 
 	public function script($scriptName) {
 		if (Sentry::check()) {
-
-			$scripts = UserScript::where('owner_id', '=', Sentry::getUser()->id)->get();
-
 			$endDate = date('Y-m-d');
 			$startDate = date('Y-m-d', strtotime("-7 day"));
+
 			// Make sure to send along to script names for the menu!
-			$this->layout->script = $scripts;
 			$this->layout->content = View::make('script')->with(array(
 				"scriptName" => $scriptName,
 				"startDate" => $startDate,
