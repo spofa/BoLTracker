@@ -238,19 +238,6 @@ $(document).ready(function() {
 		}
 	});
 
-	$.getJSON("/rest/uniqueusers/{{ $scriptName }}", function(data) {
-
-		$('.{{ $scriptName }}-unique-users')
-		  .prop('number', $('.{{ $scriptName }}-unique-users').html())
-		  .animateNumber(
-		    {
-		      number: data
-		    },
-		    2000
-		  );
-		$('.{{ $scriptName }}-unique-users').html(data);
-	});
-
 	$.getJSON("/rest/activeusers/{{$scriptName}}", function(data){
 		var week_data = data;
 		{{ $scriptName }}_active_users = Morris.Bar({
@@ -272,6 +259,19 @@ $(document).ready(function() {
 			labels : ['{{$scriptName}}'],
 			events : ['{{$startDate}}', '{{$endDate}}']
 		});
+	});
+
+	$.getJSON("/rest/uniqueusers/{{ $scriptName }}", function(data) {
+
+		$('.{{ $scriptName }}-unique-users')
+		  .prop('number', $('.{{ $scriptName }}-unique-users').html())
+		  .animateNumber(
+		    {
+		      number: data
+		    },
+		    2000
+		  );
+		$('.{{ $scriptName }}-unique-users').html(data);
 	});
 
 	function update() {
