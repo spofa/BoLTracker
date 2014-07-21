@@ -184,6 +184,16 @@ class RestController extends BaseController {
 		return $datesArray;
 	}
 
+	public function postCreatescript() {
+		$newScript = new UserScript;
+		$newScript->script_name = Input::get('scriptName');
+		$newScript->owner_id = Input::get('id');
+		$newScript->save();
+
+		Session::flash('success', "You created the script: " . Input::get('scriptName'));
+		return Redirect::back();
+	}
+
 }
 
 ?>

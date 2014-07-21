@@ -31,6 +31,23 @@ class ViewController extends BaseController {
 		}
 	}
 
+	public function register() {
+		if (Sentry::check()) {
+			return Redirect::to('dashboard');
+		} else {
+			return View::make('register');
+		}
+	}
+
+	public function newscript() {
+		if (Sentry::check()) {
+
+			$this->layout->content = View::make('newscript');
+		} else {
+			return Redirect::to('/auth/login');
+		}
+	}
+
 	public function script($scriptName) {
 		if (Sentry::check()) {
 			$endDate = date('Y-m-d');

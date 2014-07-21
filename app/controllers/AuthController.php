@@ -56,14 +56,15 @@ class AuthController extends BaseController {
 
   }
 
-  public function getRegister() {
+  public function postRegisteruser() {
 
     try
     {
         // Let's register a user.
         $user = Sentry::register(array(
-            'email'    => '',
-            'password' => '',
+            'email'    => Input::get('email'),
+            'password' => Input::get('password'),
+            'activated' => 1,
         ));
 
         // Let's get the activation code
@@ -73,16 +74,22 @@ class AuthController extends BaseController {
     }
     catch (Cartalyst\Sentry\Users\LoginRequiredException $e)
     {
-        echo 'Login field is required.';
+        Session::flash('error', 'Login field is required.');
+        return Redirect::back();
     }
     catch (Cartalyst\Sentry\Users\PasswordRequiredException $e)
     {
-        echo 'Password field is required.';
+        Session::flash('error', 'Password field is required.');
+        return Redirect::back();
     }
     catch (Cartalyst\Sentry\Users\UserExistsException $e)
     {
-        echo 'User with this login already exists.';
+        Session::flash('error', 'User with this login already exists.');
+        return Redirect::back();
     }
+
+    Session::flash('success', 'Created account! You can login now');
+    return Redirect::to('/auth/login');
   }
 
   public function getLogout() {

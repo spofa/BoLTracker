@@ -50,7 +50,7 @@
 				<!-- END AJAX-DROPDOWN -->
 			</div>
 
-			<span id="login-header-space"> <span class="hidden-mobile">Need an account?</span> <a href="register.html" class="btn btn-danger">Creat account</a> </span>
+			<span id="login-header-space"> <span class="hidden-mobile">Need an account?</span> <a href="/auth/register" class="btn btn-danger">Creat account</a> </span>
 
 		</header>
 
@@ -67,20 +67,40 @@
 				</div>
 				@endif
 
+				@if (Session::has('success'))
+				<div class="alert alert-success fade in">
+					<button class="close" data-dismiss="alert">
+						×
+					</button>
+					<i class="fa-fw fa fa-check"></i>
+					<strong>Success</strong> {{{ Session::get('success') }}}
+				</div>
+				@endif
+
 				<div class="row">
-					<div class="col-xs-12 col-sm-12 col-md-7 col-lg-8 hidden-xs hidden-sm">
+					<div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 hidden-xs hidden-sm">
+						<h1 class="txt-color-red login-header-big">BoL Tracker</h1>
+						<div class="hero">
+
+							<div class="pull-left login-desc-box-l">
+								<h4 class="paragraph-header">BoL Tracker allows you to track metrics of your script without giving up the users anonymity</h4>
+							</div>
+							
+							<img src="/img/demo/iphoneview.png" alt="" class="pull-right display-image" style="width:210px">
+							
+						</div>
 
 						<div class="row">
 							<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-								<h5 class="about-heading">About BoLTracker</h5>
+								<h5 class="about-heading">About Bol Tracker</h5>
 								<p>
-									Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa.
+									BoL Tracker is a portal that allows you, as a scripter, to track metrics on your script usage with absolute ease.
 								</p>
 							</div>
 							<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-								<h5 class="about-heading">Up to date and damn good looking stats!</h5>
+								<h5 class="about-heading">Custom tracking?</h5>
 								<p>
-									Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi voluptatem accusantium!
+									I'm more than happy to help build custom metrics (for example spell hit percentage) for you to track! Just contact me, Dibes, on BoL.com!
 								</p>
 							</div>
 						</div>

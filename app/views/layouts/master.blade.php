@@ -120,6 +120,9 @@
 					<li class="active">
 						<a href="/" title="Dashboard"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">Dashboard</span></a>
 					</li>
+					<li class="">
+						<a href="/script/new"><i class="fa fa-lg fa-fw fa-plus-circle"></i> <span class="menu-item-parent">Add Script</span></a>
+					</li>
 					<li>
 						<a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">Scripts</span></a>
 						<ul>
@@ -224,7 +227,7 @@
 		<script src="/js/app.js"></script>
 		
 		<!-- PAGE RELATED PLUGIN(S) -->
-		
+		<script src="/js/plugin/fuelux/wizard/wizard.js"></script>
 		<!-- Vector Maps Plugin: Vectormap engine, Vectormap language -->
 		<script src="/js/plugin/vectormap/jquery-jvectormap-1.2.2.min.js"></script>
 		<script src="/js/plugin/vectormap/jquery-jvectormap-world-mill-en.js"></script>

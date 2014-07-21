@@ -22,10 +22,14 @@ Route::get('/', function()
 
 // Login route.
 Route::get('auth/login', array('as' => 'login', 'uses' => 'ViewController@login'));
+// Registration route
+Route::get('auth/register', array('as' => 'login', 'uses' => 'ViewController@register'));
 // Dashboard route.
 Route::get('dashboard', array('as' => 'dashboard', 'uses' => 'ViewController@dashboard'));
 // Script view route.
 Route::get('script/{scriptName}', array('as' => 'script', 'uses' => 'ViewController@script'));
+// New Script route.
+Route::get('script/create/new', "ViewController@newscript");
 
 /*
  * Auth related routes
