@@ -23,6 +23,7 @@
 		<!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
 		<link rel="stylesheet" type="text/css" media="screen" href="/css/smartadmin-production.css">
 		<link rel="stylesheet" type="text/css" media="screen" href="/css/smartadmin-skins.css">
+		<link rel="stylesheet" href="/css/bootstrapValidator.min.css"/>
 
 		<!-- SmartAdmin RTL Support is under construction
 		<link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-rtl.css"> -->
@@ -208,7 +209,7 @@
 
 		<!-- JQUERY VALIDATE -->
 		<script src="/js/plugin/jquery-validate/jquery.validate.min.js"></script>
-
+		<script type="text/javascript" src="/js/bootstrapValidator.min.js"></script>
 		<!-- JQUERY MASKED INPUT -->
 		<script src="/js/plugin/masked-input/jquery.maskedinput.min.js"></script>
 

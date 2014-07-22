@@ -63,7 +63,7 @@
 					<div class="widget-body">
 
 
-						<form class="form" role="form" action="/rest/createscript" method="post">
+						<form class="form" role="form" id="newscript" action="/rest/createscript" method="post">
 							
 							<fieldset>
 								<div class="form-group">
@@ -117,6 +117,28 @@
 			    
 			  });
 
+			$("#newscript").bootstrapValidator({
+				message: 'This value is not valid',
+				fields: {
+					scriptName: {
+						message: "The scriptname is not valid",
+						validators: {
+	                    	notEmpty: {
+	                        	message: 'The Script is required and cannot be empty'
+	                    	},
+	                    	stringLength: {
+		                        min: 2,
+		                        max: 150,
+		                        message: 'The Script must be more than 2 and less than 150 characters long'
+	                    	},
+	                    	regexp: {
+		                        regexp: /^[a-zA-Z0-9_]+$/,
+		                        message: 'The Script can only consist of alphabetical, number and underscore'
+	                    	}
+	                	}
+	            	}
+                }
+			});
 		
 		})
 
