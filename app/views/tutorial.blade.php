@@ -52,6 +52,7 @@
 							<pre><code>
 -- These variables need to be near the top of your script so you can call them in your callbacks.
 HWID = Base64Encode(tostring(os.getenv("PROCESSOR_IDENTIFIER")..os.getenv("USERNAME")..os.getenv("COMPUTERNAME")..os.getenv("PROCESSOR_LEVEL")..os.getenv("PROCESSOR_REVISION")))
+-- DO NOT CHANGE. This is set to your proper ID.
 id = {{{ Sentry::getUser()->id }}}
 
 ScriptName = "Your scriptname here"
@@ -68,7 +69,6 @@ assert(load(Base64Decode("G0x1YVIAAQQEBAgAGZMNChoKAAAAAAAAAAAAAQIDAAAAJQAAAAgAAI
 
 							<pre><code>
 function OnLoad()
-
 	UpdateWeb(true, ScriptName, id, HWID)
 end
 
