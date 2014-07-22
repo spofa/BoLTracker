@@ -1,5 +1,7 @@
 <?php
 
+use Carbon\Carbon;
+
 class RestController extends BaseController {
 
 	public function getNewplayer() {
@@ -100,8 +102,8 @@ class RestController extends BaseController {
 			return $finalArray;
 
 		} else {
-			$scriptDates = Script::where('script_name', '=', $scriptName)->where("owner_id", "=", Sentry::getUser()->id)->groupBy(DB::raw('DAY(created_at)'))->get(array('script_name', 'created_at'));
-			$scripts = Script::where('script_name', '=', $scriptName)->where("owner_id", "=", Sentry::getUser()->id)->get(array('script_name', 'created_at'));
+			$scriptDates = Script::where('script_name', '=', $scriptName)->where('created_at','>',Carbon::today()->subWeek())->where("owner_id", "=", Sentry::getUser()->id)->groupBy(DB::raw('DAY(created_at)'))->get(array('script_name', 'created_at'));
+			$scripts = Script::where('script_name', '=', $scriptName)->where('created_at','>',Carbon::today()->subWeek())->where("owner_id", "=", Sentry::getUser()->id)->get(array('script_name', 'created_at'));
 			$datesArray = array();
 
 			foreach($scriptDates as $dates) {
@@ -127,13 +129,13 @@ class RestController extends BaseController {
 	}
 
 	public function getUniqueusers($scriptName) {
-		$uniqueUsers = Script::where("script_name", '=', $scriptName)->where("owner_id", "=", Sentry::getUser()->id)->groupBy("hwid")->get();
+		$uniqueUsers = Script::where("script_name", '=', $scriptName)->where('created_at','>',Carbon::today()->subWeek())->where("owner_id", "=", Sentry::getUser()->id)->groupBy("hwid")->get();
 
 		return count($uniqueUsers);
 	}
 
 	public function getActiveusers($scriptName) {
-		$scriptDates = ActiveScript::where('script_name', '=', $scriptName)->where("owner_id", "=", Sentry::getUser()->id)->where("running", "=", "1")->groupBy(DB::raw('DAY(created_at)'))->get(array('script_name', 'created_at'));
+		$scriptDates = ActiveScript::where('script_name', '=', $scriptName)->where('created_at','>',Carbon::today()->subWeek())->where("owner_id", "=", Sentry::getUser()->id)->where("running", "=", "1")->groupBy(DB::raw('DAY(created_at)'))->get(array('script_name', 'created_at'));
 		$scripts = ActiveScript::where('script_name', '=', $scriptName)->where("owner_id", "=", Sentry::getUser()->id)->where("running", "=", "1")->get(array('script_name', 'created_at'));
 		$datesArray = array();
 
@@ -159,7 +161,7 @@ class RestController extends BaseController {
 	}
 
 	public function getUniqueruns($scriptName) {
-		$scriptDates = Script::where('script_name', '=', $scriptName)->where("owner_id", "=", Sentry::getUser()->id)->groupBy("hwid")->groupBy(DB::raw('DAY(created_at)'))->get(array('script_name', 'created_at'));
+		$scriptDates = Script::where('script_name', '=', $scriptName)->where('created_at','>',Carbon::today()->subWeek())->where("owner_id", "=", Sentry::getUser()->id)->groupBy("hwid")->groupBy(DB::raw('DAY(created_at)'))->get(array('script_name', 'created_at'));
 		$scripts = Script::where('script_name', '=', $scriptName)->groupBy("hwid")->where("owner_id", "=", Sentry::getUser()->id)->get(array('script_name', 'created_at'));
 		$datesArray = array();
 
