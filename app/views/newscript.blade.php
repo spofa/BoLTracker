@@ -132,7 +132,7 @@
 		                        message: 'The Script must be more than 2 and less than 150 characters long'
 	                    	},
 	                    	regexp: {
-		                        regexp: /^[a-zA-Z0-9_]+$/,
+		                        regexp: /^[a-zA-Z0-9]+$/,
 		                        message: 'The Script can only consist of alphabetical, number and underscore'
 	                    	}
 	                	}
