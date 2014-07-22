@@ -32,6 +32,8 @@ Route::get('script/{scriptName}', array('as' => 'script', 'uses' => 'ViewControl
 Route::get('script/create/new', "ViewController@newscript");
 // Script integration tutorial route.
 Route::get('script/create/tutorial', "ViewController@tutorial");
+// Edit scripts route.
+Route::get('script/create/edit', "ViewController@editscript");
 /*
  * Auth related routes
  */

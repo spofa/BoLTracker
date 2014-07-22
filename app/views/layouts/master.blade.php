@@ -127,6 +127,9 @@
 					<li class="">
 						<a href="/script/create/new"><i class="fa fa-lg fa-fw fa-plus-circle"></i> <span class="menu-item-parent">Add Script</span></a>
 					</li>
+					<li class="">
+						<a href="/script/create/edit"><i class="fa fa-lg fa-fw fa-pencil"></i> <span class="menu-item-parent">Edit Scripts</span></a>
+					</li>
 					<li>
 						<a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">Scripts</span></a>
 						<ul>

@@ -64,6 +64,16 @@ class ViewController extends BaseController {
 		}
 	}
 
+	public function editscript() {
+		if (Sentry::check()) {
+			$scripts = UserScript::where('owner_id', '=', Sentry::getUser()->id)->get();
+
+			$this->layout->content = View::make('editscripts')->with('scripts', $scripts);
+		} else {	
+			return Redirect::to('/auth/login');
+		}
+	}
+
 	public function tutorial() {
 		if (Sentry::check()) {
 			$this->layout->content = View::make('tutorial');

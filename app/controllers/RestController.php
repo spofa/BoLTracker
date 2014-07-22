@@ -201,6 +201,40 @@ class RestController extends BaseController {
 		return Redirect::back();
 	}
 
+	public function getDeletescript($scriptName) {
+		$script = UserScript::where('script_name', "=", $scriptName)->first();
+
+		if ($script->owner_id == Sentry::getUser()->id) {
+			$script->delete();
+			Session::flash('success', 'You deleted the script: ' . $scriptName);
+			return Redirect::back();
+		} else {
+			Session::flash('error', 'You are not authorized to do that.');
+			return Redirect::back();
+		}
+	}
+
+	public function postUpdatescript() {
+		$nameExists = UserScript::where('script_name', '=', Input::get('scriptName'))->first();
+
+		if ($nameExists) {
+			Session::flash('error', "There is already a script with that name.");
+			return Redirect::back();
+		}
+
+		$script = UserScript::where('script_name', "=", $scriptName)->first();
+
+		if ($script->owner_id == Sentry::getUser()->id) {
+			$script->script_name = Input::get('scriptName');
+			$script->save();
+			Session::flash('success', 'You updated the script: ' . $scriptName . " to: " . $script->script_name);
+			return Redirect::back();
+		} else {
+			Session::flash('error', 'You are not authorized to do that.');
+			return Redirect::back();
+		}
+	}
+
 }
 
 ?>
