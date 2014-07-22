@@ -107,10 +107,19 @@ class RestController extends BaseController {
 			$datesArray = array();
 
 			foreach($scriptDates as $dates) {
-				array_push($datesArray, array(
+				$canRun = true;
+
+				foreach($datesArray as $date) {
+					if (in_array(date('Y-m-d', strtotime($dates->created_at)), $date)) {
+						$canRun = false;
+					}
+				}
+				if ($canRun) {
+					array_push($datesArray, array(
 						'period' => date('Y-m-d', strtotime($dates->created_at)),
 						$dates->script_name => 0
 					));
+				}	
 			}
 			
 			foreach ($scripts as $script) {
@@ -166,10 +175,19 @@ class RestController extends BaseController {
 		$datesArray = array();
 
 		foreach($scriptDates as $dates) {
-			array_push($datesArray, array(
+			$canRun = true;
+
+			foreach($datesArray as $date) {
+				if (in_array(date('Y-m-d', strtotime($dates->created_at)), $date)) {
+					$canRun = false;
+				}
+			}
+			if ($canRun) {
+				array_push($datesArray, array(
 					'period' => date('Y-m-d', strtotime($dates->created_at)),
 					$dates->script_name => 0
 				));
+			}	
 		}
 		
 		foreach ($scripts as $script) {
