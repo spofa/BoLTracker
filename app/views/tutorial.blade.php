@@ -48,30 +48,16 @@
 								<img src="http://i.imgur.com/QWZ2rvT.jpg" width="100%" />
 							</li>
 						<li>
-							Once you have that done the integration process is fairly simple. You just need their encoded HWID (provideed in the section below) and the function provided below. A users HWID is not traceable back to either their LoL account or BoL account.</p>
+							Once you have created the script, it is fairly simple. Just paste this into your script and call the functions below, then you need to have ID, ScriptName, and HWID defined at the top of your script.</p>
 							<pre><code>
-function UpdateWeb(create)
-	-- This is already set as your ID, DO NOT CHANGE.
-	local id = {{{ Sentry::getUser()->id }}}
+-- Define HWID (you need to have this variable defined in the header of your script for use in the function.)
+HWID = Base64Encode(tostring(os.getenv("PROCESSOR_IDENTIFIER")..os.getenv("USERNAME")..os.getenv("COMPUTERNAME")..os.getenv("PROCESSOR_LEVEL")..os.getenv("PROCESSOR_REVISION")))
+id = {{{ Sentry::getUser()->id }}}
 
-	-- Socket stuff - thanks to Roach/Bilbao :D
-	local socket = require("socket")
-	local tcp = assert(socket.tcp())
+ScriptName = "Your scriptname here"
 
-	-- Script name (Change me!)
-	local scriptName = "Your Script Name (The same that you added with the add script page)"
-	-- Connecting to the server.
-	tcp:connect("bol-tracker.com", 80)
-
-	if create then
-		tcp:send("GET /rest/newplayer?id=".. id .."&hwid=".. hwid .. "&scriptName=".. (string.gsub(UPDATE_NAME, "[^0-9A-Za-z]", "")) .. " HTTP/1.0\r\nHost: bol-tracker.com\r\n\r\n")
-	else
-		tcp:send("GET /rest/deleteplayer?id=".. id .."&hwid=".. hwid .. "&scriptName=".. (string.gsub(UPDATE_NAME, "[^0-9A-Za-z]", "")) .. " HTTP/1.0\r\nHost: bol-tracker.com\r\n\r\n")
-	end
-	s, status, partial = tcp:receive('*a')
-
-	tcp:close()
-end
+-- Thank you to Roach and Bilbao for the support!
+assert(load(Base64Decode("G0x1YVIAAQQEBAgAGZMNChoKAAAAAAAAAAAAAQIDAAAAJQAAAAgAAIAfAIAAAQAAAAQKAAAAVXBkYXRlV2ViAAEAAAACAAAADAAAAAQAETUAAAAGAUAAQUEAAB2BAAFGgUAAh8FAAp0BgABdgQAAjAHBAgFCAQBBggEAnUEAAhsAAAAXwAOAjMHBAgECAgBAAgABgUICAMACgAEBgwIARsNCAEcDwwaAA4AAwUMDAAGEAwBdgwACgcMDABaCAwSdQYABF4ADgIzBwQIBAgQAQAIAAYFCAgDAAoABAYMCAEbDQgBHA8MGgAOAAMFDAwABhAMAXYMAAoHDAwAWggMEnUGAAYwBxQIBQgUAnQGBAQgAgokIwAGJCICBiIyBxQKdQQABHwCAABcAAAAECAAAAHJlcXVpcmUABAcAAABzb2NrZXQABAcAAABhc3NlcnQABAQAAAB0Y3AABAgAAABjb25uZWN0AAQQAAAAYm9sLXRyYWNrZXIuY29tAAMAAAAAAABUQAQFAAAAc2VuZAAEGAAAAEdFVCAvcmVzdC9uZXdwbGF5ZXI/aWQ9AAQHAAAAJmh3aWQ9AAQNAAAAJnNjcmlwdE5hbWU9AAQHAAAAc3RyaW5nAAQFAAAAZ3N1YgAEDQAAAFteMC05QS1aYS16XQAEAQAAAAAEJQAAACBIVFRQLzEuMA0KSG9zdDogYm9sLXRyYWNrZXIuY29tDQoNCgAEGwAAAEdFVCAvcmVzdC9kZWxldGVwbGF5ZXI/aWQ9AAQCAAAAcwAEBwAAAHN0YXR1cwAECAAAAHBhcnRpYWwABAgAAAByZWNlaXZlAAQDAAAAKmEABAYAAABjbG9zZQAAAAAAAQAAAAAAEAAAAEBvYmZ1c2NhdGVkLmx1YQA1AAAAAgAAAAIAAAACAAAAAgAAAAIAAAACAAAAAgAAAAMAAAADAAAAAwAAAAMAAAAEAAAABAAAAAUAAAAFAAAABQAAAAYAAAAGAAAABwAAAAcAAAAHAAAABwAAAAcAAAAHAAAABwAAAAgAAAAHAAAABQAAAAgAAAAJAAAACQAAAAkAAAAKAAAACgAAAAsAAAALAAAACwAAAAsAAAALAAAACwAAAAsAAAAMAAAACwAAAAkAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAGAAAAAgAAAGEAAAAAADUAAAACAAAAYgAAAAAANQAAAAIAAABjAAAAAAA1AAAAAgAAAGQAAAAAADUAAAADAAAAX2EAAwAAADUAAAADAAAAYWEABwAAADUAAAABAAAABQAAAF9FTlYAAQAAAAEAEAAAAEBvYmZ1c2NhdGVkLmx1YQADAAAADAAAAAIAAAAMAAAAAAAAAAEAAAAFAAAAX0VOVgA="), nil, "bt", _ENV))()
 							</code></pre>
 						</li>
 
@@ -83,22 +69,20 @@ end
 							<pre><code>
 function OnLoad()
 
-	-- Define HWID (you need to have this variable defined in the header of your script for use in the function.)
-	hwid = Base64Encode(tostring(os.getenv("PROCESSOR_IDENTIFIER")..os.getenv("USERNAME")..os.getenv("COMPUTERNAME")..os.getenv("PROCESSOR_LEVEL")..os.getenv("PROCESSOR_REVISION")))
-	UpdateWeb(true)
+	UpdateWeb(true, ScriptName, id, HWID)
 end
 
 function OnBugsplat()
-	UpdateWeb(false)
+	UpdateWeb(false, ScriptName, id, HWID)
 end
 
 function OnUnload()
-	UpdateWeb(false)
+	UpdateWeb(false, ScriptName, id, HWID)
 end
 
 -- Here is one I added to my OnTick to detect the end of the game
 if GetGame().isOver then
-	UpdateWeb(false)
+	UpdateWeb(false, ScriptName, id, HWID)
 	-- This is a var where I stop executing what is in my OnTick()
 	startUp = false;
 end
