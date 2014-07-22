@@ -233,6 +233,7 @@ $(document).ready(function() {
 				xkey : "period",
 				ykeys : ['{{ $scriptName }}'],
 				labels : ['{{ $scriptName }}'],
+				xLabels: "day",
 				events : ['{{ $startDate }}', '{{ $endDate }}']
 			});
 		}
@@ -257,6 +258,7 @@ $(document).ready(function() {
 			xkey : "period",
 			ykeys : ['{{$scriptName}}'],
 			labels : ['{{$scriptName}}'],
+			xLabels: "day",
 			events : ['{{$startDate}}', '{{$endDate}}']
 		});
 	});

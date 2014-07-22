@@ -72,7 +72,6 @@ $(document).ready(function() {
 	@foreach($scripts as $script)
 
 		$.getJSON("rest/scriptruns/{{ $script->script_name }}", function(data) {
-			if ($('#{{ $script->script_name }}').length) {
 				var week_data = data;
 				var {{ $script->script_name }} = Morris.Line({
 					element : '{{$script->script_name}}',
@@ -80,6 +79,7 @@ $(document).ready(function() {
 					xkey : "period",
 					ykeys : ['{{ $script->script_name }}'],
 					labels : ['{{ $script->script_name }}'],
+					xLabels: "day",
 					events : ['{{ $startDate }}', '{{ $endDate }}']
 				});
 
@@ -89,7 +89,6 @@ $(document).ready(function() {
 				  	});
 				}
 				setInterval(update, 10000);
-			}
 		});
 
 	@endforeach
