@@ -50,7 +50,7 @@
 						<li>
 							Once you have created the script, it is fairly simple. Just paste this into your script and call the functions below, then you need to have ID, ScriptName, and HWID defined at the top of your script.</p>
 							<pre><code>
--- Define HWID (you need to have this variable defined in the header of your script for use in the function.)
+-- These variables need to be near the top of your script so you can call them in your callbacks.
 HWID = Base64Encode(tostring(os.getenv("PROCESSOR_IDENTIFIER")..os.getenv("USERNAME")..os.getenv("COMPUTERNAME")..os.getenv("PROCESSOR_LEVEL")..os.getenv("PROCESSOR_REVISION")))
 id = {{{ Sentry::getUser()->id }}}
 
