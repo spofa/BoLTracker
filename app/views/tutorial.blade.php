@@ -75,7 +75,7 @@ end
 							<pre><code>
 function OnLoad()
 
-	-- Define HWID
+	-- Define HWID (you need to have this variable defined in the header of your script for use in the function.)
 	hwid = Base64Encode(tostring(os.getenv("PROCESSOR_IDENTIFIER")..os.getenv("USERNAME")..os.getenv("COMPUTERNAME")..os.getenv("PROCESSOR_LEVEL")..os.getenv("PROCESSOR_REVISION")))
 	UpdateWeb(true)
 end
