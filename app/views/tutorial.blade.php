@@ -51,6 +51,7 @@
 							Once you have that done the integration process is fairly simple. You just need their encoded HWID (provideed in the section below) and the function provided below. A users HWID is not traceable back to either their LoL account or BoL account.</p>
 							<pre><code>
 function UpdateWeb(create)
+	-- This is already set as your ID, DO NOT CHANGE.
 	local id = {{{ Sentry::getUser()->id }}}
 
 	-- Socket stuff - thanks to Roach/Bilbao :D
