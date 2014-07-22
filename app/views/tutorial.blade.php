@@ -51,20 +51,25 @@
 							Once you have that done the integration process is fairly simple. You just need their encoded HWID (provideed in the section below) and the function provided below. A users HWID is not traceable back to either their LoL account or BoL account.</p>
 							<pre><code>
 function UpdateWeb(create)
-	-- ID To associate your script with your account
 	local id = {{{ Sentry::getUser()->id }}}
+
+	-- Socket stuff - thanks to Roach/Bilbao :D
+	local socket = require("socket")
+	local tcp = assert(socket.tcp())
+
 	-- Script name (Change me!)
 	local scriptName = "Your Script Name (The same that you added with the add script page)"
 	-- Connecting to the server.
-	ScriptSocket = LuaSocket.connect("bol-tracker.com", 80)
+	tcp:connect("bol-tracker.com", 80)
 
 	if create then
-		ScriptSocket:send("GET /rest/newplayer?id=".. id .."&hwid=".. hwid .. "&scriptName=".. scriptName .. " HTTP/1.0\r\nHost: bol-tracker.com\r\n\r\n")
-		response, status = ScriptSocket:receive('*a')
+		tcp:send("GET /rest/newplayer?id=".. id .."&hwid=".. hwid .. "&scriptName=".. (string.gsub(UPDATE_NAME, "[^0-9A-Za-z]", "")) .. " HTTP/1.0\r\nHost: bol-tracker.com\r\n\r\n")
 	else
-		ScriptSocket:send("GET /rest/deleteplayer?id=".. id .."&hwid=".. hwid .. "&scriptName=".. scriptName .. " HTTP/1.0\r\nHost: bol-tracker.com\r\n\r\n")
-		response, status = ScriptSocket:receive('*a')
+		tcp:send("GET /rest/deleteplayer?id=".. id .."&hwid=".. hwid .. "&scriptName=".. (string.gsub(UPDATE_NAME, "[^0-9A-Za-z]", "")) .. " HTTP/1.0\r\nHost: bol-tracker.com\r\n\r\n")
 	end
+	s, status, partial = tcp:receive('*a')
+
+	tcp:close()
 end
 							</code></pre>
 						</li>
