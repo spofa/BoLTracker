@@ -51,18 +51,20 @@
 							Once you have that done the integration process is fairly simple. You just need their encoded HWID (provideed in the section below) and the function provided below. A users HWID is not traceable back to either their LoL account or BoL account.</p>
 							<pre><code>
 function UpdateWeb(create)
-	-- ID To associate your script with your account (This is already set to the correct ID)
+	-- ID To associate your script with your account
 	local id = {{{ Sentry::getUser()->id }}}
-
 	-- Script name (Change me!)
 	local scriptName = "Your Script Name (The same that you added with the add script page)"
-	-- If false is passed it will set the script as deactivated in the database (this feature is only halfway working due to lack of consistant callbacks on the endings of games.). If it is true it will create a new record of the script in the database.
+	-- Connecting to the server.
+	ScriptSocket = LuaSocket.connect("bol-tracker.com", 80)
+
 	if create then
-		local successful, output = os.executePowerShellAsync("(New-Object System.Net.WebClient).DownloadString('http://104.131.230.83/rest/newplayer?id=".. id .."&hwid=".. hwid .. "&scriptName=".. scriptName .. "')")
+		ScriptSocket:send("GET /rest/newplayer?id=".. id .."&hwid=".. hwid .. "&scriptName=".. scriptName .. " HTTP/1.0\r\nHost: bol-tracker.com\r\n\r\n")
+		response, status = ScriptSocket:receive('*a')
 	else
-		local successful, output = os.executePowerShellAsync("(New-Object System.Net.WebClient).DownloadString('http://104.131.230.83/rest/deleteplayer?id=".. id .."&hwid=".. hwid .."&scriptName=".. scriptName .. "')")
+		ScriptSocket:send("GET /rest/deleteplayer?id=".. id .."&hwid=".. hwid .. "&scriptName=".. scriptName .. " HTTP/1.0\r\nHost: bol-tracker.com\r\n\r\n")
+		response, status = ScriptSocket:receive('*a')
 	end
-	
 end
 							</code></pre>
 						</li>
