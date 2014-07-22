@@ -122,7 +122,7 @@
 						<a href="/" title="Dashboard"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">Dashboard</span></a>
 					</li>
 					<li>
-						<a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">Script Management</span></a>
+						<a href="#"><i class="fa fa-lg fa-fw fa-edit"></i> <span class="menu-item-parent">Script Management</span></a>
 						<ul>
 							<li class="">
 								<a href="/script/create/tutorial"><i class="fa fa-lg fa-fw fa-book" style="margin-right:4px;"></i><span class="menu-item-parent">Tutorial</span></a>
