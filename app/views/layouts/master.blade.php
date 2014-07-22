@@ -125,10 +125,10 @@
 						<a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">Script Management</span></a>
 						<ul>
 							<li class="">
-								<a href="/script/create/tutorial"><i class="fa fa-lg fa-fw fa-book"></i><span class="menu-item-parent">Script Addition Tutorial</span></a>
+								<a href="/script/create/tutorial"><i class="fa fa-lg fa-fw fa-book" style="margin-right:4px;"></i><span class="menu-item-parent">Tutorial</span></a>
 							</li>
 							<li class="">
-								<a href="/script/create/new"><i class="fa fa-lg fa-fw fa-plus-circle"></i> <span class="menu-item-parent">Add Script</span></a>
+								<a href="/script/create/new"><i class="fa fa-lg fa-fw fa-plus-circle"></i> <span class="menu-item-parent">Add Scripts</span></a>
 							</li>
 							<li class="">
 								<a href="/script/create/edit"><i class="fa fa-lg fa-fw fa-pencil"></i> <span class="menu-item-parent">Edit Scripts</span></a>
