@@ -19,7 +19,7 @@
 		<!-- Basic Styles -->
 		<link rel="stylesheet" type="text/css" media="screen" href="/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" media="screen" href="/css/font-awesome.min.css">
-
+		<link rel="stylesheet" href="/css/github.css">
 		<!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
 		<link rel="stylesheet" type="text/css" media="screen" href="/css/smartadmin-production.css">
 		<link rel="stylesheet" type="text/css" media="screen" href="/css/smartadmin-skins.css">
@@ -243,7 +243,7 @@
 		
 		<!-- Full Calendar -->
 		<script src="/js/plugin/fullcalendar/jquery.fullcalendar.min.js"></script>
-
+		<script src="/js/libs/highlight.pack.js"></script>
 		<!-- Morris Chart Dependencies -->
 		<script src="/js/plugin/morris/raphael.2.1.0.min.js"></script>
 		<script src="/js/plugin/morris/morris.min.js"></script>

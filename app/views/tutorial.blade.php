@@ -113,8 +113,6 @@ end
 
 @section('customJS')
 
-<link rel="stylesheet" href="/css/github.css">
-<script src="/js/libs/highlight.pack.js"></script>
 <script>
 	$(document).ready(function() {
 	  $('pre code').each(function(i, block) {
@@ -122,9 +120,6 @@ end
 	  });
 	});
 </script>
-
-
-@stop
 
 
 @stop
