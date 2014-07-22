@@ -50,7 +50,7 @@
 				<!-- END AJAX-DROPDOWN -->
 			</div>
 
-			<span id="login-header-space"> <span class="hidden-mobile">Need an account?</span> <a href="/auth/register" class="btn btn-danger">Creat account</a> </span>
+			<span id="login-header-space"> <span class="hidden-mobile">Need an account?</span> <a href="/auth/register" class="btn btn-danger">Create account</a> </span>
 
 		</header>
 
