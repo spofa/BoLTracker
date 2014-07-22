@@ -95,8 +95,8 @@
 						<i class="fa fa-angle-down"></i>
 					</a> 
 					<ul class="dropdown-menu">
-			            <li><a href="/script/create/new">Add a script</a></li>
-			            <li><a href="#">Edit a script</a></li>
+			            <li><a href="/script/create/new">Add scripts</a></li>
+			            <li><a href="/script/create/edit">Edit scripts</a></li>
 			            <li class="divider"></li>
 			            <li><a href="#">Edit User</a></li>
 			        </ul>
@@ -121,17 +121,22 @@
 					<li class="active">
 						<a href="/" title="Dashboard"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">Dashboard</span></a>
 					</li>
-					<li class="">
-						<a href="/script/create/tutorial"><i class="fa fa-lg fa-fw fa-book"></i><span class="menu-item-parent">Script Addition Tutorial</span></a>
-					</li>
-					<li class="">
-						<a href="/script/create/new"><i class="fa fa-lg fa-fw fa-plus-circle"></i> <span class="menu-item-parent">Add Script</span></a>
-					</li>
-					<li class="">
-						<a href="/script/create/edit"><i class="fa fa-lg fa-fw fa-pencil"></i> <span class="menu-item-parent">Edit Scripts</span></a>
+					<li>
+						<a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">Script Management</span></a>
+						<ul>
+							<li class="">
+								<a href="/script/create/tutorial"><i class="fa fa-lg fa-fw fa-book"></i><span class="menu-item-parent">Script Addition Tutorial</span></a>
+							</li>
+							<li class="">
+								<a href="/script/create/new"><i class="fa fa-lg fa-fw fa-plus-circle"></i> <span class="menu-item-parent">Add Script</span></a>
+							</li>
+							<li class="">
+								<a href="/script/create/edit"><i class="fa fa-lg fa-fw fa-pencil"></i> <span class="menu-item-parent">Edit Scripts</span></a>
+							</li>
+							</ul>
 					</li>
 					<li>
-						<a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">Scripts</span></a>
+						<a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">Your Scripts</span></a>
 						<ul>
 							@if(count($scripts) == 0) 
 							<li>
