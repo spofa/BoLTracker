@@ -129,12 +129,18 @@
 					<li>
 						<a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">Scripts</span></a>
 						<ul>
+							@if(count($scripts) == 0) 
+							<li>
+								<a href="#">No Scripts Added</a>
+							</li>
+							@else
 							@foreach($scripts as $script)
 							<li>
 								<a href="/script/{{{ $script->script_name }}}">{{{ $script->script_name }}}</a>
 							</li>
 
 							@endforeach
+							@endif
 						</ul>
 					</li>
 				</ul>
