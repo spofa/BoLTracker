@@ -187,7 +187,7 @@ class RestController extends BaseController {
 	public function postCreatescript() {
 		$nameExists = UserScript::where('script_name', '=', Input::get('scriptName'))->first();
 
-		if ($nameExists->exists()) {
+		if ($nameExists) {
 			Session::flash('error', "There is already a script with that name.");
 			return Redirect::back();
 		}
