@@ -220,15 +220,15 @@
 <script>
 $(document).ready(function() {
 
-	var {{ $scriptName }}_user_runs;
-	var {{ $scriptName }}_unique_runs;
-	var {{ $scriptName }}_active_users;
+	var {{ preg_replace("/[^a-z0-9.]+/i", "", $scriptName) }}_user_runs;
+	var {{ preg_replace("/[^a-z0-9.]+/i", "", $scriptName) }}_unique_runs;
+	var {{ preg_replace("/[^a-z0-9.]+/i", "", $scriptName) }}_active_users;
 
 	$.getJSON("/rest/scriptruns/{{ $scriptName }}", function(data) {
-		if ($('#{{ $scriptName }}-user-runs').length) {
+		if ($('#{{ preg_replace("/[^a-z0-9.]+/i", "", $scriptName) }}-user-runs').length) {
 			var week_data = data;
-			{{ $scriptName }}_user_runs = Morris.Line({
-				element : '{{$scriptName}}-user-runs',
+			{{ preg_replace("/[^a-z0-9.]+/i", "", $scriptName) }}_user_runs = Morris.Line({
+				element : '{{ preg_replace("/[^a-z0-9.]+/i", "", $scriptName) }}-user-runs',
 				data : week_data,
 				xkey : "period",
 				ykeys : ['{{ $scriptName }}'],
@@ -241,8 +241,8 @@ $(document).ready(function() {
 
 	$.getJSON("/rest/activeusers/{{$scriptName}}", function(data){
 		var week_data = data;
-		{{ $scriptName }}_active_users = Morris.Bar({
-			element : "{{$scriptName}}-active-users",
+		{{ preg_replace("/[^a-z0-9.]+/i", "", $scriptName) }}_active_users = Morris.Bar({
+			element : "{{preg_replace("/[^a-z0-9.]+/i", "", $scriptName)}}-active-users",
 			data : week_data,
 			xkey : "period",
 			ykeys : ['{{$scriptName}}'],
@@ -250,10 +250,10 @@ $(document).ready(function() {
 		});
 	});
 
-	$.getJSON("/rest/uniqueruns/{{$scriptName}}", function(data){
+	$.getJSON("/rest/uniqueruns/{{preg_replace("/[^a-z0-9.]+/i", "", $scriptName)}}", function(data){
 		var week_data = data;
-		{{ $scriptName }}_unique_runs = Morris.Line({
-			element : "{{$scriptName}}-unique-runs",
+		{{ preg_replace("/[^a-z0-9.]+/i", "", $scriptName) }}_unique_runs = Morris.Line({
+			element : "{{preg_replace("/[^a-z0-9.]+/i", "", $scriptName)}}-unique-runs",
 			data : week_data,
 			xkey : "period",
 			ykeys : ['{{$scriptName}}'],
@@ -265,31 +265,31 @@ $(document).ready(function() {
 
 	$.getJSON("/rest/uniqueusers/{{ $scriptName }}", function(data) {
 
-		$('.{{ $scriptName }}-unique-users')
-		  .prop('number', $('.{{ $scriptName }}-unique-users').html())
+		$('.{{ preg_replace("/[^a-z0-9.]+/i", "", $scriptName) }}-unique-users')
+		  .prop('number', $('.{{ preg_replace("/[^a-z0-9.]+/i", "", $scriptName) }}-unique-users').html())
 		  .animateNumber(
 		    {
 		      number: data
 		    },
 		    2000
 		  );
-		$('.{{ $scriptName }}-unique-users').html(data);
+		$('.{{ preg_replace("/[^a-z0-9.]+/i", "", $scriptName) }}-unique-users').html(data);
 	});
 
 	function update() {
 				// Consolidate these into one func later.
 		$.getJSON("/rest/scriptruns/{{ $scriptName }}", function(data) {
-	  		{{$scriptName}}_user_runs.setData(data);
+	  		{{preg_replace("/[^a-z0-9.]+/i", "", $scriptName)}}_user_runs.setData(data);
 	  	});
 		$.getJSON("/rest/uniqueruns/{{ $scriptName }}", function(data) {
-	  		{{$scriptName}}_unique_runs.setData(data);
+	  		{{preg_replace("/[^a-z0-9.]+/i", "", $scriptName)}}_unique_runs.setData(data);
 	  	});
 		$.getJSON("/rest/activeusers/{{ $scriptName }}", function(data) {
-	  		{{$scriptName}}_active_users.setData(data);
+	  		{{preg_replace("/[^a-z0-9.]+/i", "", $scriptName)}}_active_users.setData(data);
 	  	});
 	  	$.getJSON("/rest/uniqueusers/{{ $scriptName }}", function(data) {
 	  		$('.{{ $scriptName }}-unique-users')
-			  .prop('number', $('.{{ $scriptName }}-unique-users').html())
+			  .prop('number', $('.{{ preg_replace("/[^a-z0-9.]+/i", "", $scriptName) }}-unique-users').html())
 			  .animateNumber(
 			    {
 			      number: data

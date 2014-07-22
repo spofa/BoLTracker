@@ -67,7 +67,7 @@
 							
 							<fieldset>
 								<div class="form-group">
-									<label class="sr-only" for="exampleInputEmail2">Script Name</label>
+									<label class="sr-only" for="exampleInputEmail2">Script Name - Only Alpha Numerics (A-Z, 0-9) and No Spaces</label>
 									<input type="text" name="scriptName" class="form-control" id="exampleInputEmail2" placeholder="Enter Script Name">
 								</div>
 								<input type="hidden" name="id" value="{{ Sentry::getUser()->id }}"/>
