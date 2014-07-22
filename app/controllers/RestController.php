@@ -161,7 +161,7 @@ class RestController extends BaseController {
 	}
 
 	public function getUniqueruns($scriptName) {
-		$scriptDates = Script::where('created_at','>',Carbon::today()->subWeek())->where('script_name', '=', $scriptName)->subWeek())->where("owner_id", "=", Sentry::getUser()->id)->groupBy("hwid")->groupBy(DB::raw('DAY(created_at)'))->get(array('script_name', 'created_at'));
+		$scriptDates = Script::where('created_at','>',Carbon::today()->subWeek())->where('script_name', '=', $scriptName)->where("owner_id", "=", Sentry::getUser()->id)->groupBy("hwid")->groupBy(DB::raw('DAY(created_at)'))->get(array('script_name', 'created_at'));
 		$scripts = Script::where('script_name', '=', $scriptName)->groupBy("hwid")->where("owner_id", "=", Sentry::getUser()->id)->get(array('script_name', 'created_at'));
 		$datesArray = array();
 
