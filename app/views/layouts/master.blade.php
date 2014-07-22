@@ -94,7 +94,7 @@
 						<i class="fa fa-angle-down"></i>
 					</a> 
 					<ul class="dropdown-menu">
-			            <li><a href="#">Add a script</a></li>
+			            <li><a href="/script/create/new">Add a script</a></li>
 			            <li><a href="#">Edit a script</a></li>
 			            <li class="divider"></li>
 			            <li><a href="#">Edit User</a></li>
@@ -121,7 +121,10 @@
 						<a href="/" title="Dashboard"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">Dashboard</span></a>
 					</li>
 					<li class="">
-						<a href="/script/new"><i class="fa fa-lg fa-fw fa-plus-circle"></i> <span class="menu-item-parent">Add Script</span></a>
+						<a href="/script/create/tutorial"><i class="fa fa-lg fa-fw fa-book"></i><span class="menu-item-parent">Script Addition Tutorial</span></a>
+					</li>
+					<li class="">
+						<a href="/script/create/new"><i class="fa fa-lg fa-fw fa-plus-circle"></i> <span class="menu-item-parent">Add Script</span></a>
 					</li>
 					<li>
 						<a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">Scripts</span></a>

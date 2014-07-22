@@ -30,7 +30,8 @@ Route::get('dashboard', array('as' => 'dashboard', 'uses' => 'ViewController@das
 Route::get('script/{scriptName}', array('as' => 'script', 'uses' => 'ViewController@script'));
 // New Script route.
 Route::get('script/create/new', "ViewController@newscript");
-
+// Script integration tutorial route.
+Route::get('script/create/tutorial', "ViewController@tutorial");
 /*
  * Auth related routes
  */

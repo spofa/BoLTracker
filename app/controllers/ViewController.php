@@ -64,6 +64,14 @@ class ViewController extends BaseController {
 		}
 	}
 
+	public function tutorial() {
+		if (Sentry::check()) {
+			$this->layout->content = View::make('tutorial');
+		} else {
+			return Redirect::to('/auth/login');
+		}
+	}
+
 }
 
 ?>
