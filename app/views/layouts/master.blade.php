@@ -50,7 +50,7 @@
 			<div id="logo-group">
 
 				<!-- PLACE YOUR LOGO HERE -->
-				<span id="logo"> <h1 style="margin:0;font-weight:bold">BoLTracker</h1> </span>
+				<span id="logo"> <a href="/"><img src="/img/logo.png" alt="SmartAdmin"></a></span>
 				<!-- END LOGO PLACEHOLDER -->
 				
 			</div>

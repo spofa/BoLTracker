@@ -45,7 +45,7 @@
 			<!--<span id="logo"></span>-->
 
 			<div id="logo-group">
-				<span id="logo"> <h1 style="margin:0;font-weight:bold">BoLTracker</h1> </span>
+				<span id="logo"> <a href="/"><img style="width:206px;margin-top:-11px;" src="/img/logo.png" alt="SmartAdmin"></a> </span>
 
 				<!-- END AJAX-DROPDOWN -->
 			</div>
