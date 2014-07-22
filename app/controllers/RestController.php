@@ -3,7 +3,7 @@
 class RestController extends BaseController {
 
 	public function getNewplayer() {
-		$scriptCheck = ActiveScript::where('hwid', '=', Input::get("hwid"))->where('script_name', '=', Input::get("scriptName"))->where("running", "=", "1")->get();
+		$scriptCheck = ActiveScript::where('hwid', '=', Input::get("hwid"))->where('script_name', '=', preg_replace("/[^a-z0-9.]+/i", "", Input::get("scriptName")))->where("running", "=", "1")->get();
 		
 		if (!is_null($scriptCheck)) {
 			foreach ($scriptCheck as $player) {
@@ -15,13 +15,13 @@ class RestController extends BaseController {
 		$script = new Script();
 		$script->owner_id = Input::get('id');
 		$script->hwid = Input::get("hwid");
-		$script->script_name = Input::get("scriptName");
+		$script->script_name = preg_replace("/[^a-z0-9.]+/i", "", Input::get("scriptName"));
 		$script->save();
 
 		$activeScript = new ActiveScript();
 		$activeScript->owner_id = Input::get('id');
 		$activeScript->hwid = Input::get("hwid");
-		$activeScript->script_name = Input::get("scriptName");
+		$activeScript->script_name = preg_replace("/[^a-z0-9.]+/i", "", Input::get("scriptName"));
 		$activeScript->running = 1;
 		$activeScript->save(); 
 
@@ -29,7 +29,7 @@ class RestController extends BaseController {
 	} 
 
 	public function getDeleteplayer() {
-		$activeScript = ActiveScript::where('hwid', '=', Input::get("hwid"))->where('script_name', '=', Input::get("scriptName"))->first();
+		$activeScript = ActiveScript::where('hwid', '=', Input::get("hwid"))->where('script_name', '=', preg_replace("/[^a-z0-9.]+/i", "", Input::get("scriptName")))->first();
 		$activeScript->running = 0;
 		$activeScript->save();
 		return 'success';
