@@ -72,6 +72,7 @@
 											<input class="form-control" value="{{{ $scripts[$i]->script_name }}}" name="scriptName" type="text">
 										</div>
 									</fieldset>
+									<input type="hidden" value="$scripts[$i]->script_name" name="oldScriptName" />
 									<div class="form-actions">
 										<a href="/rest/deletescript/{{{ $scripts[$i]->script_name }}}" class="btn btn-danger btn-md">
 											<i class="fa fa-trash-o"></i>

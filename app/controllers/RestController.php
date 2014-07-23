@@ -242,7 +242,7 @@ class RestController extends BaseController {
 			return Redirect::back();
 		}
 
-		$script = UserScript::where('script_name', "=", $scriptName)->first();
+		$script = UserScript::where('script_name', "=", Input::get('oldScriptName'))->first();
 
 		if ($script->owner_id == Sentry::getUser()->id) {
 			$script->script_name = Input::get('scriptName');
