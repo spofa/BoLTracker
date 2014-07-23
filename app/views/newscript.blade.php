@@ -133,7 +133,7 @@
 	                    	},
 	                    	regexp: {
 		                        regexp: /^[a-zA-Z0-9]+$/,
-		                        message: 'The Script can only consist of alphabetical, number and underscore'
+		                        message: 'The Script can only consist of letters and numbers.'
 	                    	}
 	                	}
 	            	}
