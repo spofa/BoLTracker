@@ -247,7 +247,7 @@ class RestController extends BaseController {
 		if ($script->owner_id == Sentry::getUser()->id) {
 			$script->script_name = Input::get('scriptName');
 			$script->save();
-			Session::flash('success', 'You updated the script: ' . $scriptName . " to: " . $script->script_name);
+			Session::flash('success', 'You updated the script: ' . Input::get('oldScriptName') . " to: " . $script->script_name);
 			return Redirect::back();
 		} else {
 			Session::flash('error', 'You are not authorized to do that.');
