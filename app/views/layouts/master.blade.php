@@ -170,6 +170,13 @@
 
 			<!-- MAIN CONTENT -->
 			<div id="content">
+				<div class="alert alert-warning fade in">
+					<button class="close" data-dismiss="alert">
+						×
+					</button>
+					<i class="fa-fw fa fa-warning"></i>
+					<strong>Warning</strong> The database is currently undergoing an overhaul to greatly increase scalability and efficiency. Your data may not function for the time being.
+				</div>
 				@yield('content')
 			</div>
 			<!-- END MAIN CONTENT -->

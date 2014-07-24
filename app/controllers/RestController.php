@@ -20,6 +20,37 @@ class RestController extends BaseController {
 		$script->script_name = preg_replace("/[^a-z0-9.]+/i", "", Input::get("scriptName"));
 		$script->save();
 
+		// Check for matching HWID in hwid database
+		$hwid = Hwid::where('day','>', Carbon::today()->subDay())->where('hwid', '=', Input::get('hwid'))->where('script_name', '=', Input::get('scriptName'))->first();
+		// If no record shows up proceed.
+		if (!$hwid) {
+			// Insert their HWID into the db.
+			$hwid = new Hwid;
+			$hwid->owner_id = Input::get('id');
+			$hwid->script_name = preg_replace("/[^a-z0-9.]+/i", "", Input::get("scriptName"));
+			$hwid->hwid = Input::get('hwid');
+			$hwid->day = Carbon::today();
+			$hwid->save();
+			// Get the record for today..
+			$unique = UniqueRun::where('day','>', Carbon::today()->subDay())->where('script_name', '=', Input::get('scriptName'))->first();
+			// If it exists add one to the runs.
+			if ($unique) {
+				$unique->increment('runs');
+				echo 'Adding a run. <br>';
+			} else {
+				// Otherwise create a new record. 
+				$newUser = new UniqueRun;
+				$newUser->owner_id = Input::get('id');
+				$newUser->script_name = preg_replace("/[^a-z0-9.]+/i", "", Input::get("scriptName"));
+				$newUser->runs = 1;
+				$newUser->day = Carbon::today();
+				$newUser->save();
+				echo 'Creating new record. <br>';
+			}
+		} else {
+			echo 'This hwid has ran once today. <br>';
+		}
+
 		$activeScript = new ActiveScript();
 		$activeScript->owner_id = Input::get('id');
 		$activeScript->hwid = Input::get("hwid");
@@ -37,106 +68,46 @@ class RestController extends BaseController {
 		return 'success';
 	}
 
+	/*
+	 * This gets the scripts runs by day. Needs to be reworked like uniqueruns.
+	 */
 	public function getScriptruns($scriptName) {
+		$scriptDates = Script::where('created_at','>',Carbon::today()->subWeek())->where('script_name', '=', $scriptName)->where("owner_id", "=", Sentry::getUser()->id)->groupBy(DB::raw('DAY(created_at)'))->get(array('script_name', 'created_at'));
+		$scripts = Script::where('created_at','>',Carbon::today()->subWeek())->where('script_name', '=', $scriptName)->where("owner_id", "=", Sentry::getUser()->id)->get(array('script_name', 'created_at'));
+		$datesArray = array();
 
-		if ($scriptName == "all") {
-			$scriptNames = Script::groupBy('script_name')->groupBy(DB::raw('DAY(created_at)'))->get(array('script_name', 'created_at'));
-			$scripts = Script::get(array('script_name', 'created_at'));
-			$datesArray = array();
-			$finalArray = array();
+		foreach($scriptDates as $dates) {
+			$canRun = true;
 
-			foreach($scriptNames as $scriptName) {
+			foreach($datesArray as $date) {
+				if (in_array(date('Y-m-d', strtotime($dates->created_at)), $date)) {
+					$canRun = false;
+				}
+			}
+			if ($canRun) {
 				array_push($datesArray, array(
-					'period' => date('Y-m-d', strtotime($scriptName->created_at)),
-					$scriptName->script_name => 0
+					'period' => date('Y-m-d', strtotime($dates->created_at)),
+					$dates->script_name => 0
 				));
-			}
-
-			foreach ($scripts as $script) {
-				
-
-				$tempDate = date('Y-m-d', strtotime($script->created_at));
-
-				for ($i = 0; $i < count($datesArray); $i++) { 
-					$scriptName = (string)$script->script_name;
-
-					if ($tempDate == $datesArray[$i]['period'] && array_key_exists($scriptName, $datesArray[$i])) {
-						$datesArray[$i][$scriptName]++;  
-					}
-				}
-			}
-			// $datesArray is the first mentioned array of values.
-			// finalArray is an empty array that I want to push the final values into.
-			for ($i = 0; $i < count($datesArray) - 1; $i++) { 
-
-				for ($j = $i; $j < count($datesArray); $j++) { 
-
-					$key1 = array_keys($datesArray[$i]);
-					$key2 = array_keys($datesArray[$j]);
-					// First check to see if they have the same date, if they don't then no merging!
-					if ($datesArray[$i]['period'] == $datesArray[$j]['period']) {
-						if ($j == $i) {
-							array_push($finalArray, array(
-								'period' => $datesArray[$i]['period'],
-								$key1[1] => $datesArray[$i][$key1[1]]
-							));
-						} else {
-							if ($key1[1] == $key2[1]) {
-								array_push($finalArray, array(
-									'period' => $datesArray[$i]['period'], 
-									$key1[1] => $datesArray[$i][$key1[1]] + $datesArray[$j][$key2[1]]
-								));
-							} else {
-								array_push($finalArray, array(
-									'period' => $datesArray[$i]['period'],
-									$key1[1] => $datesArray[$i][$key1[1]],
-									$key2[1] => $datesArray[$j][$key2[1]]	
-								));
-							}
-						}
-					}
-
-				}
-			}
-
-			return $finalArray;
-
-		} else {
-			$scriptDates = Script::where('created_at','>',Carbon::today()->subWeek())->where('script_name', '=', $scriptName)->where("owner_id", "=", Sentry::getUser()->id)->groupBy(DB::raw('DAY(created_at)'))->get(array('script_name', 'created_at'));
-			$scripts = Script::where('created_at','>',Carbon::today()->subWeek())->where('script_name', '=', $scriptName)->where("owner_id", "=", Sentry::getUser()->id)->get(array('script_name', 'created_at'));
-			$datesArray = array();
-
-			foreach($scriptDates as $dates) {
-				$canRun = true;
-
-				foreach($datesArray as $date) {
-					if (in_array(date('Y-m-d', strtotime($dates->created_at)), $date)) {
-						$canRun = false;
-					}
-				}
-				if ($canRun) {
-					array_push($datesArray, array(
-						'period' => date('Y-m-d', strtotime($dates->created_at)),
-						$dates->script_name => 0
-					));
-				}	
-			}
+			}	
+		}
+		
+		foreach ($scripts as $script) {
 			
-			foreach ($scripts as $script) {
-				
-				$tempDate = date('Y-m-d', strtotime($script->created_at));
+			$tempDate = date('Y-m-d', strtotime($script->created_at));
 
-				for ($i = 0; $i < count($datesArray); $i++) { 
-					if ($tempDate == $datesArray[$i]['period']) {
-						$datesArray[$i][$script->script_name]++;  
-					}
+			for ($i = 0; $i < count($datesArray); $i++) { 
+				if ($tempDate == $datesArray[$i]['period']) {
+					$datesArray[$i][$script->script_name]++;  
 				}
 			}
 		}
 
 		return $datesArray;
 	}
-
+	/*
+	 * Gets the unique total users. Probably going to be reworked.
+	 */
 	public function getUniqueusers($scriptName) {
 		$uniqueUsers = Script::where('created_at','>', Carbon::today()->subWeek())->where("script_name", '=', $scriptName)->where("owner_id", "=", Sentry::getUser()->id)->groupBy("hwid")->get();
 
@@ -168,8 +139,10 @@ class RestController extends BaseController {
 
 		return $datesArray;
 	}
-
-	public function getUniqueruns($scriptName) {
+	/*
+	 * Deprecated: use the getUniqueruns now.
+	 */
+	public function getOlduniqueruns($scriptName) {
 		$scriptDates = Script::where('created_at','>',Carbon::today()->subWeek())->where('script_name', '=', $scriptName)->where("owner_id", "=", Sentry::getUser()->id)->groupBy("hwid")->groupBy(DB::raw('DAY(created_at)'))->get(array('script_name', 'created_at'));
 		$scripts = Script::where('created_at','>',Carbon::today()->subWeek())->where('script_name', '=', $scriptName)->groupBy("hwid")->where("owner_id", "=", Sentry::getUser()->id)->get(array('script_name', 'created_at'));
 		$datesArray = array();
@@ -199,6 +172,24 @@ class RestController extends BaseController {
 					$datesArray[$i][$script->script_name]++;  
 				}
 			}
+		}
+
+		return $datesArray;
+	}
+
+	/*
+	 * New Unique runs.
+	 */
+
+	public function getUniqueruns($scriptName) {
+		$scripts = UniqueRun::where('day','>', Carbon::today()->subWeek())->where('script_name', '=', $scriptName)->get();
+		$datesArray = array();
+
+		foreach ($scripts as $script) {
+			array_push($datesArray, array(
+				'period' => $script->day,
+				$script->script_name => $script->runs
+			));
 		}
 
 		return $datesArray;
@@ -253,6 +244,72 @@ class RestController extends BaseController {
 			Session::flash('error', 'You are not authorized to do that.');
 			return Redirect::back();
 		}
+	}
+
+	/*
+	 * This converts the old database records into the new version. This is only to be used when merging the data.
+	 */ 
+	public function getConvert() {
+
+		$scriptNames = UserScript::all();
+
+		foreach ($scriptNames as $scriptName) {
+
+			$scriptDates = Script::where('created_at','>',Carbon::today()->subWeek())->where('script_name', '=', $scriptName->script_name)->where("owner_id", "=", $scriptName->owner_id)->groupBy("hwid")->groupBy(DB::raw('DAY(created_at)'))->get(array('script_name', 'hwid', 'created_at'));
+			$scripts = Script::where('created_at','>',Carbon::today()->subWeek())->where('script_name', '=', $scriptName->script_name)->groupBy("hwid")->where("owner_id", "=", $scriptName->owner_id)->get(array('script_name', 'hwid', 'created_at'));
+			$scriptHwid = Script::where('created_at', '>', Carbon::today()->subWeek())->groupBy('hwid')->get();
+			$datesArray = array();
+
+			foreach($scriptDates as $dates) {
+				$canRun = true;
+
+				foreach($datesArray as $date) {
+					if (in_array(date('Y-m-d', strtotime($dates->created_at)), $date)) {
+						$canRun = false;
+					}
+				}
+				if ($canRun) {
+					array_push($datesArray, array(
+						'period' => date('Y-m-d', strtotime($dates->created_at)),
+						$dates->script_name => 0,
+						'hwid' => $dates->hwid
+					));
+				}	
+			}
+			
+			foreach ($scripts as $script) {
+				
+				$tempDate = date('Y-m-d', strtotime($script->created_at));
+
+				for ($i = 0; $i < count($datesArray); $i++) { 
+					if ($tempDate == $datesArray[$i]['period']) {
+						$datesArray[$i][$script->script_name]++;  
+					}
+				}
+			}
+
+			echo var_dump($datesArray);
+
+			for ($i = 0; $i < count($datesArray); $i++) { 
+				$unique = new UniqueRun;
+				$unique->owner_id = $scriptName->owner_id;
+				$unique->script_name = $scriptName->script_name;
+				$unique->runs = $datesArray[$i][$scriptName->script_name];
+				$unique->day = $datesArray[$i]['period'];
+				$unique->save();
+			}
+
+		}
+
+		foreach ($scriptHwid as $script) {
+			$hwid = new Hwid;
+			$hwid->owner_id = $script->owner_id;
+			$hwid->script_name = $script->script_name;
+			$hwid->hwid = $script->hwid;
+			$hwid->day = date('Y-m-d', strtotime($script->created_at));
+			$hwid->save();
+		}
+
 	}
 
 }
