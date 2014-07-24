@@ -175,7 +175,7 @@
 						×
 					</button>
 					<i class="fa-fw fa fa-warning"></i>
-					<strong>Warning</strong> The database is currently undergoing an overhaul to greatly increase scalability and efficiency. Your data may not function for the time being.
+					<strong>Warning</strong> The database has been overhauled. You should see the unique runs graph load much faster! Please report to Dibes at bol.com or Dibesjr on skype if there are any issues.
 				</div>
 				@yield('content')
 			</div>
