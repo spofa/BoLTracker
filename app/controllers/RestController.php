@@ -220,6 +220,12 @@ class RestController extends BaseController {
 		return $datesArray;
 	}
 
+	public function getTotaluniqueusers() {
+		$unique = Hwid::where('owner_id', '=', Sentry::getUser()->id)->groupBy('hwid')->get();
+
+		return count($unique);
+	}
+
 	public function getTotalruns() {
 		$users = ScriptRun::where('owner_id', '=', Sentry::getUser()->id)->get(array("runs"));
 		$count = 0;

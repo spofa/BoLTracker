@@ -16,6 +16,9 @@
 		<li class="sparks-info">
 			<h5> Total Unique Runs <span class="txt-color-greenDark"><a style="text-decoration:none;color:#496949;" class="totalUnique">0</a> Runs</span></h5>
 		</li>
+		<li class="sparks-info">
+			<h5> Total Unique Users <span class="txt-color-purple"><a style="text-decoration:none;color:#6e587a;" class="totalUsers">0</a> users</span></h5>
+		</li>
 	</ul>
 </div>
 
@@ -126,6 +129,18 @@ $(document).ready(function() {
 		  );
 	});
 
+	$.getJSON("/rest/totaluniqueusers", function(data) {
+
+		$('.totalUsers')
+		  .prop('number', $('.totalUsers').html())
+		  .animateNumber(
+		    {
+		      number: data
+		    },
+		    2000
+		  );
+	});
+
 	$.getJSON("/rest/totalunique", function(data) {
 
 		$('.totalUnique')
@@ -139,6 +154,18 @@ $(document).ready(function() {
 	});
 
 	function update() {
+		$.getJSON("/rest/totaluniqueusers", function(data) {
+
+			$('.totalUsers')
+			  .prop('number', $('.totalUsers').html())
+			  .animateNumber(
+			    {
+			      number: data
+			    },
+			    2000
+			  );
+		});
+		
 	  	$.getJSON("/rest/totalruns", function(data) {
 
 		$('.totalRuns')
