@@ -14,11 +14,21 @@ class RestController extends BaseController {
 			}    
 		}
 
-		$script = new Script();
-		$script->owner_id = Input::get('id');
-		$script->hwid = Input::get("hwid");
-		$script->script_name = preg_replace("/[^a-z0-9.]+/i", "", Input::get("scriptName"));
-		$script->save();
+		// check for record for today
+		$scriptRun = ScriptRun::where('day', '>', Carbon::today()->subDay())->where('script_name', '=', Input::get('scriptName'))->first();
+
+		if ($scriptRun) {
+			$scriptRun->increment('runs');
+			echo 'Adding a Script run. <br>';
+		} else {
+			$newScript = new ScriptRun;
+			$newScript->owner_id = Input::get('id');
+			$newScript->script_name = preg_replace("/[^a-z0-9.]+/i", "", Input::get("scriptName"));
+			$newScript->runs = 1;
+			$newScript->day = Carbon::today();
+			$newScript->save();
+			echo 'Creating new script record. <br>';
+		}
 
 		// Check for matching HWID in hwid database
 		$hwid = Hwid::where('day','>', Carbon::today()->subDay())->where('hwid', '=', Input::get('hwid'))->where('script_name', '=', Input::get('scriptName'))->first();
