@@ -14,7 +14,7 @@
 			<h5> Total Script Runs <span class="txt-color-blue"><a style="text-decoration:none;color:#57889c;" class="totalRuns">0</a> Runs</span></h5>
 		</li>
 		<li class="sparks-info">
-			<h5> Total Unique Users <span class="txt-color-greenDark"><a style="text-decoration:none;color:#496949;" class="totalUnique">0</a> Users</span></h5>
+			<h5> Total Unique Users <span class="txt-color-greenDark"><a style="text-decoration:none;color:#496949;" class="totalUnique">0</a> Runs</span></h5>
 		</li>
 	</ul>
 </div>
