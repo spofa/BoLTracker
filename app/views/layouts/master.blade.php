@@ -118,24 +118,24 @@
 				-->
 
 				<ul>
-					<li class="active">
-						<a href="/" title="Dashboard"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">Dashboard</span></a>
+					<li class="@if(Route::currentRouteName() == 'dashboard') active @endif">
+						<a href="/" title="Dashboard"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">Dashboard </span></a>
 					</li>
-					<li>
+					<li class="@if(Route::currentRouteName() == 'tutorial' || Route::currentRouteName() == 'newScript' || Route::currentRouteName() == 'editScript') open @endif">
 						<a href="#"><i class="fa fa-lg fa-fw fa-edit"></i> <span class="menu-item-parent">Script Management</span></a>
 						<ul>
-							<li class="">
+							<li class="@if(Route::currentRouteName() == 'tutorial') active @endif">
 								<a href="/script/create/tutorial"><i class="fa fa-lg fa-fw fa-book" style="margin-right:4px;"></i><span class="menu-item-parent">Tutorial</span></a>
 							</li>
-							<li class="">
+							<li class="@if(Route::currentRouteName() == 'newScript') active @endif">
 								<a href="/script/create/new"><i class="fa fa-lg fa-fw fa-plus-circle"></i> <span class="menu-item-parent">Add Scripts</span></a>
 							</li>
-							<li class="">
+							<li class="@if(Route::currentRouteName() == 'editScript') active @endif">
 								<a href="/script/create/edit"><i class="fa fa-lg fa-fw fa-pencil"></i> <span class="menu-item-parent">Edit Scripts</span></a>
 							</li>
 							</ul>
 					</li>
-					<li>
+					<li class="@if(Route::currentRouteName() == 'singleScript') open @endif">
 						<a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">Your Scripts</span></a>
 						<ul>
 							@if(count($scripts) == 0) 
@@ -144,7 +144,12 @@
 							</li>
 							@else
 							@foreach($scripts as $script)
-							<li>
+							<li class="<?php if(isset($scriptName)) { 
+												if($scriptName == $script->script_name) {
+													echo 'active'; 
+												}
+											} ?>
+											">
 								<a href="/script/{{{ $script->script_name }}}">{{{ $script->script_name }}}</a>
 							</li>
 

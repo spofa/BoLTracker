@@ -27,13 +27,13 @@ Route::get('auth/register', array('as' => 'login', 'uses' => 'ViewController@reg
 // Dashboard route.
 Route::get('dashboard', array('as' => 'dashboard', 'uses' => 'ViewController@dashboard'));
 // Script view route.
-Route::get('script/{scriptName}', array('as' => 'script', 'uses' => 'ViewController@script'));
+Route::get('script/{scriptName}', array('as' => 'singleScript', 'uses' => 'ViewController@script'));
 // New Script route.
-Route::get('script/create/new', "ViewController@newscript");
+Route::get('script/create/new', array('as' => 'newScript', 'uses' => "ViewController@newscript"));
 // Script integration tutorial route.
-Route::get('script/create/tutorial', "ViewController@tutorial");
+Route::get('script/create/tutorial', array('as' => 'tutorial', 'uses' => "ViewController@tutorial"));
 // Edit scripts route.
-Route::get('script/create/edit', "ViewController@editscript");
+Route::get('script/create/edit', array('as' => 'editScript', 'uses' => "ViewController@editscript"));
 /*
  * Auth related routes
  */

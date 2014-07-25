@@ -53,6 +53,7 @@ class ViewController extends BaseController {
 			$endDate = date('Y-m-d');
 			$startDate = date('Y-m-d', strtotime("-6 day"));
 
+			$this->layout->with('scriptName', $scriptName);
 			// Make sure to send along to script names for the menu!
 			$this->layout->content = View::make('script')->with(array(
 				"scriptName" => $scriptName,
