@@ -306,7 +306,7 @@ $(document).ready(function() {
 
 	}
 
-	setInterval(update, 10000);
+	setInterval(update, 30000);
 
 });
 </script>
