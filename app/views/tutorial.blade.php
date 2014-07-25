@@ -61,6 +61,7 @@ HWID = Base64Encode(tostring(os.getenv("PROCESSOR_IDENTIFIER")..os.getenv("USERN
 -- DO NOT CHANGE. This is set to your proper ID.
 id = {{{ Sentry::getUser()->id }}}
 
+-- CHANGE ME. Make this the exact same name as the script you added into the site!
 ScriptName = "Your scriptname here"
 
 -- Thank you to Roach and Bilbao for the support!

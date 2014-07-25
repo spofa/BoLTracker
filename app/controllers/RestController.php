@@ -221,7 +221,7 @@ class RestController extends BaseController {
 	}
 
 	public function getTotaluniqueusers() {
-		$unique = Hwid::where('owner_id', '=', Sentry::getUser()->id)->groupBy('hwid')->get();
+		$unique = Hwid::where("owner_id", "=", Sentry::getUser()->id)->groupBy("hwid")->get(array('hwid'));
 
 		return count($unique);
 	}
