@@ -1,5 +1,11 @@
 @extends('layouts.master')
 
+@section('bread')
+
+<i class="fa fa-pencil fa-fw "></i> Script Management <span>&gt; Edit Scripts </span>
+
+@stop
+
 @section('content')
 
 @if (Session::has('error'))

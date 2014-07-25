@@ -1,6 +1,28 @@
 @extends('layouts.master')
 
+@section('bread')
+
+<i class="fa fa-dashboard fa-fw "></i> Dashboard
+
+@stop
+
+@section('dashData')
+
+<div class="col-xs-12 col-sm-5 col-md-5 col-lg-8">
+	<ul id="sparks" class="">
+		<li class="sparks-info">
+			<h5> Total Script Runs <span class="txt-color-blue"><a style="text-decoration:none;color:#57889c;" class="totalRuns">0</a> Runs</span></h5>
+		</li>
+		<li class="sparks-info">
+			<h5> Total Unique Runs <span class="txt-color-greenDark"><a style="text-decoration:none;color:#496949;" class="totalUnique">0</a> Runs</span></h5>
+		</li>
+	</ul>
+</div>
+
+@stop
+
 @section('content')
+
 <!-- widget grid -->
 <section id="widget-grid" class="">
 
@@ -82,16 +104,70 @@ $(document).ready(function() {
 					xLabels: "day",
 					events : ['{{ $startDate }}', '{{ $endDate }}']
 				});
-
-				function update() {
-					$.getJSON("rest/scriptruns/{{ $script->script_name }}", function(data) {
-				  		{{$script->script_name}}.setData(data);
-				  	});
-				}
-				setInterval(update, 10000);
 		});
 
+		function update() {
+			$.getJSON("rest/scriptruns/{{ $script->script_name }}", function(data) {
+		  		{{$script->script_name}}.setData(data);
+		  	});
+		}
+		setInterval(update, 10000);
+
 	@endforeach
+
+	$.getJSON("/rest/totalruns", function(data) {
+
+		$('.totalRuns')
+		  .prop('number', $('.totalRuns').html())
+		  .animateNumber(
+		    {
+		      number: data
+		    },
+		    2000
+		  );
+	});
+
+	$.getJSON("/rest/totalunique", function(data) {
+
+		$('.totalUnique')
+		  .prop('number', $('.totalUnique').html())
+		  .animateNumber(
+		    {
+		      number: data
+		    },
+		    2000
+		  );
+	});
+
+	function update() {
+	  	$.getJSON("/rest/totalruns", function(data) {
+
+		$('.totalRuns')
+		  .prop('number', $('.totalRuns').html())
+		  .animateNumber(
+		    {
+		      number: data
+		    },
+		    2000
+		  );
+		});
+
+		$.getJSON("/rest/totalunique", function(data) {
+
+			$('.totalUnique')
+			  .prop('number', $('.totalUnique').html())
+			  .animateNumber(
+			    {
+			      number: data
+			    },
+			    2000
+			  );
+		});
+
+	}
+
+	setInterval(update, 5000);
+
 });
 </script>
 

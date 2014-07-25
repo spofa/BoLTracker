@@ -177,6 +177,14 @@
 					<i class="fa-fw fa fa-warning"></i>
 					<strong>Warning</strong> The database has been overhauled. The graphs should load significantly faster all around! Please report to Dibes at bol.com or Dibesjr on skype if there are any issues.
 				</div>
+
+				<div class="row">
+					<div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+						<h1 class="page-title txt-color-blueDark"> @yield('bread') </h1>
+					</div>
+					@yield('dashData')
+				</div>
+
 				@yield('content')
 			</div>
 			<!-- END MAIN CONTENT -->

@@ -220,6 +220,28 @@ class RestController extends BaseController {
 		return $datesArray;
 	}
 
+	public function getTotalruns() {
+		$users = ScriptRun::where('owner_id', '=', Sentry::getUser()->id)->get(array("runs"));
+		$count = 0;
+
+		foreach ($users as $user) {
+			$count += $user->runs;
+		}
+
+		return $count;
+	}
+
+	public function getTotalunique() {
+		$users = UniqueRun::where('owner_id', '=', Sentry::getUser()->id)->get(array("runs"));
+		$count = 0;
+
+		foreach ($users as $user) {
+			$count += $user->runs;
+		}
+
+		return $count;
+	}
+
 	public function postCreatescript() {
 		$nameExists = UserScript::where('script_name', '=', Input::get('scriptName'))->first();
 

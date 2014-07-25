@@ -1,5 +1,11 @@
 @extends('layouts.master')
 
+@section('bread')
+
+<i class="fa fa-bar-chart-o fa-fw "></i> Scripts <span>&gt; {{{$scriptName}}} </span>
+
+@stop
+
 @section('content')
 
 

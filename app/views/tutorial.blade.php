@@ -1,5 +1,11 @@
 @extends('layouts.master')
 
+@section('bread')
+
+<i class="fa fa-book fa-fw "></i> Script Management <span>&gt; Tutorial </span>
+
+@stop
+
 @section('content')
 
 	<div class="row">
