@@ -94,24 +94,23 @@ $(document).ready(function() {
 	@foreach($scripts as $script)
 
 		$.getJSON("rest/scriptruns/{{ $script->script_name }}", function(data) {
-				var week_data = data;
-				var {{ $script->script_name }} = Morris.Line({
-					element : '{{$script->script_name}}',
-					data : week_data,
-					xkey : "period",
-					ykeys : ['{{ $script->script_name }}'],
-					labels : ['{{ $script->script_name }}'],
-					xLabels: "day",
-					events : ['{{ $startDate }}', '{{ $endDate }}']
-				});
+			var week_data = data;
+			var {{ $script->script_name }} = Morris.Line({
+				element : '{{$script->script_name}}',
+				data : week_data,
+				xkey : "period",
+				ykeys : ['{{ $script->script_name }}'],
+				labels : ['{{ $script->script_name }}'],
+				xLabels: "day",
+				events : ['{{ $startDate }}', '{{ $endDate }}']
+			});
+			function update() {
+				$.getJSON("rest/scriptruns/{{ $script->script_name }}", function(data) {
+			  		{{$script->script_name}}.setData(data);
+			  	});
+			}
+			setInterval(update, 10000);
 		});
-
-		function update() {
-			$.getJSON("rest/scriptruns/{{ $script->script_name }}", function(data) {
-		  		{{$script->script_name}}.setData(data);
-		  	});
-		}
-		setInterval(update, 10000);
 
 	@endforeach
 
