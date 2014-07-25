@@ -121,10 +121,10 @@ class RestController extends BaseController {
 	}
 
 	/*
-	 * Gets the unique total users. Probably going to be reworked.
+	 * Gets the unique total users. Reworked.
 	 */
 	public function getUniqueusers($scriptName) {
-		$uniqueUsers = Script::where('created_at','>', Carbon::today()->subWeek())->where("script_name", '=', $scriptName)->where("owner_id", "=", Sentry::getUser()->id)->groupBy("hwid")->get();
+		$uniqueUsers = Hwid::where("script_name", '=', $scriptName)->where("owner_id", "=", Sentry::getUser()->id)->groupBy("hwid")->get(array('hwid'));
 
 		return count($uniqueUsers);
 	}
