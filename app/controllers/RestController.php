@@ -261,7 +261,7 @@ class RestController extends BaseController {
 		$script = UserScript::where('script_name', "=", Input::get('oldScriptName'))->first();
 
 		if ($script->owner_id == Sentry::getUser()->id) {
-			$script->script_name = preg_replace("/[^a-z0-9.]+/i", "", Input::get("scriptName"));
+			$script->script_name = strip_tags(Input::get('scriptName'));
 			$script->save();
 			Session::flash('success', 'You updated the script: ' . Input::get('oldScriptName') . " to: " . $script->script_name);
 			return Redirect::back();
