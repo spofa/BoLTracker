@@ -229,7 +229,7 @@ class RestController extends BaseController {
 		}
 
 		$newScript = new UserScript;
-		$newScript->script_name = Input::get('scriptName');
+		$newScript->script_name = strip_tags(Input::get('scriptName'));
 		$newScript->owner_id = Input::get('id');
 		$newScript->save();
 
