@@ -40,6 +40,7 @@ class RestController extends BaseController {
 			$hwid->script_name = preg_replace("/[^a-z0-9.]+/i", "", Input::get("scriptName"));
 			$hwid->hwid = Input::get('hwid');
 			$hwid->day = Carbon::today();
+			$hwid->country = GeoIP::getLocation()['country'];
 			$hwid->save();
 			// Get the record for today..
 			$unique = UniqueRun::where('day','>', Carbon::today()->subDay())->where('script_name', '=', Input::get('scriptName'))->first();
