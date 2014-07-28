@@ -91,6 +91,7 @@ class RestController extends BaseController {
                      ->where('created_at','>',Carbon::today()->subWeek())
                      ->where('script_name', '=', $scriptName)
                      ->groupBy('country')
+              		 ->orderBy(DB::raw('count(*)'), 'DESC')
                      ->get();
         $demographics = array();
         $totalRuns = 0;
