@@ -11,10 +11,10 @@
 <div class="col-xs-12 col-sm-5 col-md-5 col-lg-8">
 	<ul id="sparks" class="">
 		<li class="sparks-info">
-			<h5> Total Script Runs <span class="txt-color-blue"><a style="text-decoration:none;color:#57889c;" class="totalRuns">0</a> Runs</span></h5>
+			<h5> Weekly Script Runs <span class="txt-color-blue"><a style="text-decoration:none;color:#57889c;" class="totalRuns">0</a> Runs</span></h5>
 		</li>
 		<li class="sparks-info">
-			<h5> Unique Runs <span class="txt-color-greenDark"><a style="text-decoration:none;color:#496949;" class="uniqueUsers">0</a> Runs</span></h5>
+			<h5> Weekly Unique Runs <span class="txt-color-greenDark"><a style="text-decoration:none;color:#496949;" class="uniqueUsers">0</a> Runs</span></h5>
 		</li>
 	</ul>
 </div>
@@ -241,7 +241,7 @@ $(document).ready(function() {
 		});
 	});
 
-	$.getJSON("/rest/uniqueusers/{{ $scriptName }}", function(data) {
+	$.getJSON("/rest/weeklyunique/{{ $scriptName }}", function(data) {
 		$('.uniqueUsers').prop('number', $('.uniqueUsers').html()).animateNumber({
 		      number: data
 		    }, 
@@ -265,7 +265,7 @@ $(document).ready(function() {
 		$.getJSON("/rest/uniqueruns/{{ $scriptName }}", function(data) {
 	  		{{preg_replace("/[^a-z0-9.]+/i", "", $scriptName)}}_unique_runs.setData(data);
 	  	});
-	  	$.getJSON("/rest/uniqueusers/{{ $scriptName }}", function(data) {
+	  	$.getJSON("/rest/weeklyunique/{{ $scriptName }}", function(data) {
 	  		$('.uniqueUsers')
 			  .prop('number', $('.uniqueUsers').html())
 			  .animateNumber(
