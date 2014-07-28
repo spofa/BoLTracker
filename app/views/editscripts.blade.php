@@ -66,9 +66,9 @@
 				@for($i = 0; $i < count($scripts); $i++)
 					<div class="panel panel-default">
 						<div class="panel-heading">
-							<h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" collapsed> <i class="fa fa-lg fa-angle-down pull-right"></i> <i class="fa fa-lg fa-angle-up pull-right"></i>{{{ $scripts[$i]->script_name }}}</a></h4>
+							<h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" class="collapsed"> <i class="fa fa-lg fa-angle-down pull-right"></i> <i class="fa fa-lg fa-angle-up pull-right"></i>{{{ $scripts[$i]->script_name }}}</a></h4>
 						</div>
-						<div id="{{{ $scripts[$i]->script_name }}}" class="panel-collapse collapse" style="height: 0px;">
+						<div id="{{{ $scripts[$i]->script_name }}}" @if ($i == 0) class="panel-collapse collapse in" @else class="panel-collapse collapse" @endif style="height: 0px;">
 							<div class="panel-body">
 								<form action="/rest/updatescript" method="post">		
 									<fieldset>
