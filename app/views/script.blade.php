@@ -197,6 +197,8 @@
 <script>
 $(document).ready(function() {
 
+	localStorage.clear();
+
 	var {{ preg_replace("/[^a-z0-9.]+/i", "", $scriptName) }}_user_runs;
 	var {{ preg_replace("/[^a-z0-9.]+/i", "", $scriptName) }}_unique_runs;
 	var {{ preg_replace("/[^a-z0-9.]+/i", "", $scriptName) }}_active_users;
