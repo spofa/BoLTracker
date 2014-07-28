@@ -303,38 +303,6 @@
 				/*
 				* TODO: add a way to add more todo's to list
 				*/
-
-				// initialize sortable
-				$(function() {
-					$("#sortable1, #sortable2").sortable({
-						handle : '.handle',
-						connectWith : ".todo",
-						update : countTasks
-					}).disableSelection();
-				});
-
-				// check and uncheck
-				$('.todo .checkbox > input[type="checkbox"]').click(function() {
-					var $this = $(this).parent().parent().parent();
-
-					if ($(this).prop('checked')) {
-						$this.addClass("complete");
-
-						// remove this if you want to undo a check list once checked
-						//$(this).attr("disabled", true);
-						$(this).parent().hide();
-
-						// once clicked - add class, copy to memory then remove and add to sortable3
-						$this.slideUp(500, function() {
-							$this.clone().prependTo("#sortable3").effect("highlight", {}, 800);
-							$this.remove();
-							countTasks();
-						});
-					} else {
-						// insert undo code here...
-					}
-
-				})
 			});
 
 		</script>
