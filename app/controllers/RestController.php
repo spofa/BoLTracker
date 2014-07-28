@@ -116,6 +116,44 @@ class RestController extends BaseController {
 		return $datesArray;
 	}
 
+	/*
+	 * Function to get all the regions in the past week that the script has been run from.
+	 */
+
+	public function getCountries($scriptName) {
+		// Grab data.
+		$countries = DB::table('hwid')
+                     ->select(DB::raw('count(*) as count, country'))
+                     ->where('created_at','>',Carbon::today()->subWeek())
+                     ->where('script_name', '=', $scriptName)
+                     ->groupBy('country')
+                     ->get();
+        $demographics = array();
+        $totalRuns = 0;
+
+        foreach ($countries as $country) {
+        	// Get the total number of runs for percentage. This way may be faster. There is at total 195 loops
+        	$totalRuns += $country->count;
+        }
+
+        // Loop through to push to the array.
+        foreach ($countries as $country) {
+        	if ($country->country != null) {
+	        	array_push($demographics, array(
+	        		'value' => round(($country->count / $totalRuns) * 100, 2),
+	        		'label' => $country->country
+	        	));
+        	} else {
+        		array_push($demographics, array(
+	        		'value' => round(($country->count / $totalRuns) * 100, 2),
+	        		'label' => 'Unknown'
+	        	));
+        	}
+        }
+
+        return $demographics;
+	}
+
 	public function getScriptruns($scriptName) {
 		$scriptRuns = ScriptRun::where('day', '>', Carbon::today()->subWeek())->where('script_name', '=', $scriptName)->get();
 		$datesArray = array();
@@ -235,6 +273,17 @@ class RestController extends BaseController {
 		}
 
 		return $count;
+	}
+
+	public function getWeeklyruns($scriptName) {
+		$runs = ScriptRun::where('day','>', Carbon::today()->subWeek())->where('script_name', '=', $scriptName)->get(array('runs'));
+		$total = 0;
+
+		foreach ($runs as $run) {
+			$total += $run->runs;
+		}
+
+		return $total;
 	}
 
 	public function getTotalunique() {
