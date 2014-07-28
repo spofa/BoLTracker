@@ -175,12 +175,12 @@
 
 			<!-- MAIN CONTENT -->
 			<div id="content">
-				<div class="alert alert-warning fade in">
+				<div class="alert alert-success fade in">
 					<button class="close" data-dismiss="alert">
 						×
 					</button>
-					<i class="fa-fw fa fa-warning"></i>
-					<strong>Warning</strong> The database has been overhauled. The graphs should load significantly faster all around! Please report to Dibes at bol.com or Dibesjr on skype if there are any issues.
+					<i class="fa-fw fa fa-check-circle-o"></i>
+					<strong>New Update!</strong> I have cleaned up a lot of backend code to make things run smoother! I have also added basic demographics. For now a lot of the data hasn't been tracked with demographics, but don't worry, it will populate soon!
 				</div>
 
 				<div class="row">

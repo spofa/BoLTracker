@@ -81,41 +81,41 @@ class RestController extends BaseController {
 	}
 
 	/*
-	 * This gets the scripts runs by day. Needs to be reworked like uniqueruns.
+	 * Function to get all the regions in the past week that the script has been run from.
 	 */
-	public function getOldscriptruns($scriptName) {
-		$scriptDates = Script::where('created_at','>',Carbon::today()->subWeek())->where('script_name', '=', $scriptName)->where("owner_id", "=", Sentry::getUser()->id)->groupBy(DB::raw('DAY(created_at)'))->get(array('script_name', 'created_at'));
-		$scripts = Script::where('created_at','>',Carbon::today()->subWeek())->where('script_name', '=', $scriptName)->where("owner_id", "=", Sentry::getUser()->id)->get(array('script_name', 'created_at'));
-		$datesArray = array();
 
-		foreach($scriptDates as $dates) {
-			$canRun = true;
+	public function getCountries($scriptName) {
+		// Grab data.
+		$countries = DB::table('hwid')
+                     ->select(DB::raw('count(*) as count, country'))
+                     ->where('created_at','>',Carbon::today()->subWeek())
+                     ->where('script_name', '=', $scriptName)
+                     ->groupBy('country')
+                     ->get();
+        $demographics = array();
+        $totalRuns = 0;
 
-			foreach($datesArray as $date) {
-				if (in_array(date('Y-m-d', strtotime($dates->created_at)), $date)) {
-					$canRun = false;
-				}
-			}
-			if ($canRun) {
-				array_push($datesArray, array(
-					'period' => date('Y-m-d', strtotime($dates->created_at)),
-					$dates->script_name => 0
-				));
-			}	
-		}
-		
-		foreach ($scripts as $script) {
-			
-			$tempDate = date('Y-m-d', strtotime($script->created_at));
+        foreach ($countries as $country) {
+        	// Get the total number of runs for percentage. This way may be faster. There is at total 195 loops
+        	$totalRuns += $country->count;
+        }
 
-			for ($i = 0; $i < count($datesArray); $i++) { 
-				if ($tempDate == $datesArray[$i]['period']) {
-					$datesArray[$i][$script->script_name]++;  
-				}
-			}
-		}
+        // Loop through to push to the array.
+        foreach ($countries as $country) {
+        	if ($country->country != null) {
+	        	array_push($demographics, array(
+	        		'value' => round(($country->count / $totalRuns) * 100, 2),
+	        		'label' => $country->country
+	        	));
+        	} else {
+        		array_push($demographics, array(
+	        		'value' => round(($country->count / $totalRuns) * 100, 2),
+	        		'label' => 'Unknown'
+	        	));
+        	}
+        }
 
-		return $datesArray;
+        return $demographics;
 	}
 
 	public function getScriptruns($scriptName) {
@@ -141,6 +141,13 @@ class RestController extends BaseController {
 		return count($uniqueUsers);
 	}
 
+	// Function to get the unique users from the last week.
+	public function getWeeklyunique($scriptName) {
+		$uniqueUsers = Hwid::where('day','>',Carbon::today()->subWeek())->where("script_name", '=', $scriptName)->where("owner_id", "=", Sentry::getUser()->id)->groupBy("hwid")->get(array('hwid'));
+
+		return count($uniqueUsers);
+	}
+
 	public function getActiveusers($scriptName) {
 		$scriptDates = ActiveScript::where('created_at','>',Carbon::today()->subWeek())->where('script_name', '=', $scriptName)->where("owner_id", "=", Sentry::getUser()->id)->where("running", "=", "1")->groupBy(DB::raw('DAY(created_at)'))->get(array('script_name', 'created_at'));
 		$scripts = ActiveScript::where('script_name', '=', $scriptName)->where("owner_id", "=", Sentry::getUser()->id)->where("running", "=", "1")->get(array('script_name', 'created_at'));
@@ -151,43 +158,6 @@ class RestController extends BaseController {
 					'period' => date('Y-m-d', strtotime($dates->created_at)),
 					$dates->script_name => 0
 				));
-		}
-		
-		foreach ($scripts as $script) {
-			
-			$tempDate = date('Y-m-d', strtotime($script->created_at));
-
-			for ($i = 0; $i < count($datesArray); $i++) { 
-				if ($tempDate == $datesArray[$i]['period']) {
-					$datesArray[$i][$script->script_name]++;  
-				}
-			}
-		}
-
-		return $datesArray;
-	}
-	/*
-	 * Deprecated: use the getUniqueruns now.
-	 */
-	public function getOlduniqueruns($scriptName) {
-		$scriptDates = Script::where('created_at','>',Carbon::today()->subWeek())->where('script_name', '=', $scriptName)->where("owner_id", "=", Sentry::getUser()->id)->groupBy("hwid")->groupBy(DB::raw('DAY(created_at)'))->get(array('script_name', 'created_at'));
-		$scripts = Script::where('created_at','>',Carbon::today()->subWeek())->where('script_name', '=', $scriptName)->groupBy("hwid")->where("owner_id", "=", Sentry::getUser()->id)->get(array('script_name', 'created_at'));
-		$datesArray = array();
-
-		foreach($scriptDates as $dates) {
-			$canRun = true;
-
-			foreach($datesArray as $date) {
-				if (in_array(date('Y-m-d', strtotime($dates->created_at)), $date)) {
-					$canRun = false;
-				}
-			}
-			if ($canRun) {
-				array_push($datesArray, array(
-					'period' => date('Y-m-d', strtotime($dates->created_at)),
-					$dates->script_name => 0
-				));
-			}	
 		}
 		
 		foreach ($scripts as $script) {
@@ -237,6 +207,17 @@ class RestController extends BaseController {
 		}
 
 		return $count;
+	}
+
+	public function getWeeklyruns($scriptName) {
+		$runs = ScriptRun::where('day','>', Carbon::today()->subWeek())->where('script_name', '=', $scriptName)->get(array('runs'));
+		$total = 0;
+
+		foreach ($runs as $run) {
+			$total += $run->runs;
+		}
+
+		return $total;
 	}
 
 	public function getTotalunique() {
