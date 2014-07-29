@@ -98,7 +98,7 @@ $(document).ready(function() {
 
 		$.getJSON("rest/scriptruns/{{ $script->script_name }}", function(data) {
 			var week_data = data;
-			var {{ $script->script_name }} = Morris.Line({
+			var {{ $script->script_name }} = Morris.Area({
 				element : '{{$script->script_name}}',
 				data : week_data,
 				xkey : "period",

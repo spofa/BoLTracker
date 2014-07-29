@@ -207,7 +207,7 @@ $(document).ready(function() {
 	$.getJSON("/rest/scriptruns/{{ $scriptName }}", function(data) {
 		if ($('#{{ preg_replace("/[^a-z0-9.]+/i", "", $scriptName) }}-user-runs').length) {
 			var week_data = data;
-			{{ preg_replace("/[^a-z0-9.]+/i", "", $scriptName) }}_user_runs = Morris.Line({
+			{{ preg_replace("/[^a-z0-9.]+/i", "", $scriptName) }}_user_runs = Morris.Area({
 				element : '{{ preg_replace("/[^a-z0-9.]+/i", "", $scriptName) }}-user-runs',
 				data : week_data,
 				xkey : "period",
@@ -232,7 +232,7 @@ $(document).ready(function() {
 
 	$.getJSON("/rest/uniqueruns/{{preg_replace("/[^a-z0-9.]+/i", "", $scriptName)}}", function(data){
 		var week_data = data;
-		{{ preg_replace("/[^a-z0-9.]+/i", "", $scriptName) }}_unique_runs = Morris.Line({
+		{{ preg_replace("/[^a-z0-9.]+/i", "", $scriptName) }}_unique_runs = Morris.Area({
 			element : "{{preg_replace("/[^a-z0-9.]+/i", "", $scriptName)}}-unique-runs",
 			data : week_data,
 			xkey : "period",
